@@ -23,13 +23,12 @@
     "paths": {
       "@/*": ["src/*"],
       "@pages/*": ["src/pages/*"],
-      "@assets/*": ["src/assets/*"],
       "@components/*": ["src/components/*"],
-      "@services/*": ["src/services/*"],
-      "@contexts/*": ["src/contexts/*"],
       "@hooks/*": ["src/hooks/*"],
+      "@store/*": ["src/store/*"],
       "@utils/*": ["src/utils/*"],
-      "@router/*": ["src/router/*"]
+      "@types/*": ["src/types/*"],
+      "@assets/*": ["src/assets/*"]
     }
   },
   "include": ["src/**/*"]

@@ -4,3 +4,41 @@
   padding: 2rem;
   text-align: center;
 }
+
+/* App.css */
+
+.App {
+  text-align: center;
+  padding: 20px;
+}
+
+.card-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+}
+
+.card {
+  background-color: white;
+  border: 2px solid #646cff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(100, 108, 255, 0.37);
+  padding: 20px;
+  width: 250px;
+  text-align: left;
+  transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card h2 {
+  margin-top: 0;
+}
+
+.card p {
+  color: #666;
+}
