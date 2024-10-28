@@ -71,3 +71,14 @@
 .button {
   height: 45px;
 }
+
+@media (max-width: 800px) {
+  .card {
+    padding: 5px;
+  }
+
+  .button {
+    width: 110px;
+    height: 45px;
+  }
+}
