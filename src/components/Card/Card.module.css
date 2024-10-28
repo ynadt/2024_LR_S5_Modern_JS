@@ -1,0 +1,73 @@
+.card {
+  max-width: 580px;
+  background: #fff;
+  border-radius: 6px;
+  border: 1px solid rgba(53, 184, 190, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 25px;
+  font-family: Inter, sans-serif;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.imageContainer {
+  width: 120px;
+  height: 120px;
+  margin-right: 20px;
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.cardName {
+  color: #08090A;
+  font-size: 18px;
+  letter-spacing: 0.6px;
+}
+
+.cardPrice {
+  max-width: 85px;
+  color: #35B8BE;
+  font-size: 15px;
+}
+
+.cardDescription {
+  max-width: 350px;
+  color: #546285;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: start;
+  letter-spacing: 0.32px;
+  margin-bottom: 5px;
+}
+
+.cardActions {
+  display: flex;
+  gap: 10px;
+}
+
+.quantityInput {
+  width: 60px;
+  background: #FAFAFA;
+  border: 1px solid #DDDDDD;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 16px;
+  color: #08090A;
+}
+
+.button {
+  height: 45px;
+}
