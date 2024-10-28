@@ -38,6 +38,7 @@ const AppHeader = () => {
                 </div>
                 <div className={styles.cartIconContainer}>
                     <img loading="lazy" src={cartIcon} alt="Cart" className={styles.cartIcon} />
+                    <span className={styles.cartCounter}>3</span>
                 </div>
             </nav>
         </header>

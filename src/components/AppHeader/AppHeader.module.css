@@ -74,6 +74,48 @@
   fill: #fff;
 }
 
+.cartIconContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 55px;
+  height: 55px;
+  margin-left: 65px;
+  background-color: #35B8BE;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+
+.cartIconContainer:hover {
+  transform: scale(1.1);
+}
+
+.cartIcon {
+  width: 25px;
+  height: 17px;
+  fill: #fff;
+}
+
+.cartCounter {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  background-color: #fff;
+  color: #35B8BE;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 50%;
+  box-shadow: 0 0 3px 1px rgba(53, 184, 190, 0.5);
+}
+
+
 .closeMenuButton {
   display: none;
 }
