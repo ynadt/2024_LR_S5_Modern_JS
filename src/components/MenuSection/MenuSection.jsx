@@ -1,7 +1,7 @@
 import styles from './MenuSection.module.css';
 
-import CardList from 'src/components/CardList/CardList.jsx';
-import Button from 'src/components/Button/Button.jsx';
+import CardList from 'components/CardList/CardList.jsx';
+import Button from 'components/Button/Button.jsx';
 
 const MenuSection = () => {
     const handleButtonClick = (category) => {

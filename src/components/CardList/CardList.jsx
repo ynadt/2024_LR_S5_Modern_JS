@@ -1,5 +1,5 @@
-import cardData from 'src/data/products.js';
-import Card from 'src/components/Card/Card.jsx';
+import cardData from 'data/products.js';
+import Card from 'components/Card/Card.jsx';
 import styles from './CardList.module.css';
 
 const CardList = () => {

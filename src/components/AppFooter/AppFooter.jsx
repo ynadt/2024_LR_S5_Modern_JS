@@ -1,8 +1,8 @@
 import styles from './AppFooter.module.css';
-import LogoIcon from 'src/assets/icons/logo-icon.svg';
-import InstagramIcon from 'src/assets/icons/instagram-icon.svg';
-import TwitterIcon from 'src/assets/icons/twitter-icon.svg';
-import YouTubeIcon from 'src/assets/icons/youtube-icon.svg';
+import LogoIcon from 'assets/icons/logo-icon.svg';
+import InstagramIcon from 'assets/icons/instagram-icon.svg';
+import TwitterIcon from 'assets/icons/twitter-icon.svg';
+import YouTubeIcon from 'assets/icons/youtube-icon.svg';
 
 const linkSections = [
     {

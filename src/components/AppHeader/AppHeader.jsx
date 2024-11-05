@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styles from './AppHeader.module.css';
-import logoIcon from 'src/assets/icons/logo-icon.svg';
-import cartIcon from 'src/assets/icons/cart-icon.svg';
+import logoIcon from 'assets/icons/logo-icon.svg';
+import cartIcon from 'assets/icons/cart-icon.svg';
 
 const AppHeader = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);

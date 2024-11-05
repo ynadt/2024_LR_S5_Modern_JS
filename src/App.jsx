@@ -1,5 +1,5 @@
 import './App.css';
-import MenuPage from 'src/pages/MenuPage.jsx';
+import MenuPage from 'pages/MenuPage.jsx';
 
 function App() {
     return (

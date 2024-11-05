@@ -1,4 +1,4 @@
-import Button from 'src/components/Button/Button.jsx';
+import Button from 'components/Button/Button.jsx';
 import styles from './Card.module.css';
 
 const Card = ({ name, price, description, image }) => {
