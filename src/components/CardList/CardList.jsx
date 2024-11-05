@@ -1,11 +1,10 @@
-import cardData from 'data/products.js';
 import Card from 'components/Card/Card.jsx';
 import styles from './CardList.module.css';
 
-const CardList = () => {
+const CardList = ({ cards = [] }) => {
     return (
         <div className={styles.cardList}>
-            {cardData.map((item) => (
+            {cards.map((item) => (
                 <Card key={item.name} name={item.name} price={item.price} description={item.description} image={item.image} />
             ))}
         </div>

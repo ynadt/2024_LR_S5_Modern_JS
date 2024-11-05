@@ -1,12 +1,19 @@
-import styles from './MenuSection.module.css';
-
-import CardList from 'components/CardList/CardList.jsx';
+import { useState } from 'react';
 import Button from 'components/Button/Button.jsx';
-
+import CardList from 'components/CardList/CardList.jsx';
+import cardData from 'data/products.js';
+import styles from './MenuSection.module.css';
 const MenuSection = () => {
-    const handleButtonClick = (category) => {
+    const categories = cardData.length ? [...new Set(cardData.map((item) => item.category))] : [];
+
+    const [selectedCategory, setSelectedCategory] = useState(categories[0] || null);
+
+    const selectCategory = (category) => {
+        setSelectedCategory(category);
         console.log(`${category} button clicked`);
     };
+
+    const filteredCards = selectedCategory ? cardData.filter((item) => item.category === selectedCategory) : [];
 
     return (
         <section className={styles.menuSection}>
@@ -20,16 +27,14 @@ const MenuSection = () => {
                 <span> our store to place a pickup order. Fast and fresh food.</span>
             </p>
             <div className={styles.buttonRow}>
-                <Button onClick={() => handleButtonClick('Dessert')}>Dessert</Button>
-                <Button onClick={() => handleButtonClick('Dinner')} isActive={false}>
-                    Dinner
-                </Button>
-                <Button onClick={() => handleButtonClick('Breakfast')} isActive={false}>
-                    Breakfast
-                </Button>
+                {categories.map((category) => (
+                    <Button key={category} onClick={() => selectCategory(category)} isActive={selectedCategory === category}>
+                        {category}
+                    </Button>
+                ))}
             </div>
-            <CardList />
-            <Button label="See more" onClick={() => handleButtonClick('See more')} />
+            {filteredCards.length > 0 ? <CardList cards={filteredCards} /> : <p className={styles.noItemsMessage}>No items available.</p>}
+            <Button>See more</Button>
         </section>
     );
 };
