@@ -12,6 +12,7 @@ class MenuSection extends Component {
             data: [],
             selectedCategory: null,
             categories: [],
+            visibleCount: 6,
             isLoading: true,
         };
     }
@@ -38,12 +39,19 @@ class MenuSection extends Component {
     };
 
     selectCategory = (category) => {
-        this.setState({ selectedCategory: category });
+        this.setState({ selectedCategory: category, visibleCount: 6 });
+    };
+
+    loadMore = () => {
+        this.setState((prevState) => ({
+            visibleCount: prevState.visibleCount + 6,
+        }));
     };
 
     render() {
-        const { data, selectedCategory, categories, isLoading } = this.state;
+        const { data, selectedCategory, categories, isLoading, visibleCount } = this.state;
         const filteredCards = selectedCategory ? data.filter((item) => item.category === selectedCategory) : [];
+        const visibleCards = filteredCards.slice(0, visibleCount);
 
         return (
             <section className={styles.menuSection}>
@@ -66,13 +74,14 @@ class MenuSection extends Component {
 
                 {isLoading ? (
                     <p>Loading menu...</p>
-                ) : filteredCards.length > 0 ? (
-                    <CardList cards={filteredCards} />
+                ) : visibleCards.length > 0 ? (
+                    <>
+                        <CardList cards={visibleCards} />
+                        {visibleCards.length < filteredCards.length && <Button onClick={this.loadMore}>See more</Button>}
+                    </>
                 ) : (
                     <p className={styles.noItemsMessage}>No items available.</p>
                 )}
-
-                {filteredCards.length > 0 && <Button>See more</Button>}
             </section>
         );
     }
