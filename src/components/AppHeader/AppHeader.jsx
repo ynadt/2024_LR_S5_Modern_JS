@@ -2,16 +2,10 @@ import { useState } from 'react';
 import styles from './AppHeader.module.css';
 import logoIcon from 'assets/icons/logo-icon.svg';
 import cartIcon from 'assets/icons/cart-icon.svg';
+import { navItems } from 'data/headerData.js';
 
 const AppHeader = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-    const navItems = [
-        { label: 'Home', href: '/' },
-        { label: 'Menu', href: '/' },
-        { label: 'Company', href: '/' },
-        { label: 'Login', href: '/' },
-    ];
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);

@@ -1,39 +1,6 @@
 import styles from './AppFooter.module.css';
 import LogoIcon from 'assets/icons/logo-icon.svg';
-import InstagramIcon from 'assets/icons/instagram-icon.svg';
-import TwitterIcon from 'assets/icons/twitter-icon.svg';
-import YouTubeIcon from 'assets/icons/youtube-icon.svg';
-
-const linkSections = [
-    {
-        title: 'COMPANY',
-        links: [
-            { label: 'Home', url: '/' },
-            { label: 'Order', url: '/' },
-            { label: 'FAQ', url: '/' },
-            { label: 'Contact', url: '/' },
-        ],
-    },
-    {
-        title: 'TEMPLATE',
-        links: [
-            { label: 'Style Guide', url: '/' },
-            { label: 'Changelog', url: '/' },
-            { label: 'Licence', url: '/' },
-            { label: 'Webflow University', url: '/' },
-        ],
-    },
-    {
-        title: 'FLOWBASE',
-        links: [{ label: 'More Cloneables', url: '/' }],
-    },
-];
-
-const socialIcons = [
-    { icon: InstagramIcon, alt: 'Instagram', url: 'https://instagram.com' },
-    { icon: TwitterIcon, alt: 'Twitter', url: 'https://twitter.com' },
-    { icon: YouTubeIcon, alt: 'YouTube', url: 'https://youtube.com' },
-];
+import { linkSections, socialIcons } from 'data/footerData.js';
 
 const AppFooter = () => {
     return (
