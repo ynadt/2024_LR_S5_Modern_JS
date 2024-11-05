@@ -24,7 +24,7 @@ export const linkSections = [
 ];
 
 export const socialIcons = [
-    { icon: 'assets/icons/instagram-icon.svg', alt: 'Instagram', url: 'https://instagram.com' },
-    { icon: 'assets/icons/twitter-icon.svg', alt: 'Twitter', url: 'https://twitter.com' },
-    { icon: 'assets/icons/youtube-icon.svg', alt: 'YouTube', url: 'https://youtube.com' },
+    { icon: 'src/assets/icons/instagram-icon.svg', alt: 'Instagram', url: 'https://instagram.com' },
+    { icon: 'src/assets/icons/twitter-icon.svg', alt: 'Twitter', url: 'https://twitter.com' },
+    { icon: 'src/assets/icons/youtube-icon.svg', alt: 'YouTube', url: 'https://youtube.com' },
 ];
