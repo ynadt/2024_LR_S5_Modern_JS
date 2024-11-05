@@ -1,28 +1,49 @@
 import { Component } from 'react';
 import Button from 'components/Button/Button.jsx';
 import CardList from 'components/CardList/CardList.jsx';
-import cardData from 'data/products.js';
+import { fetchMeals } from 'services/api.js';
 import styles from './MenuSection.module.css';
 
 class MenuSection extends Component {
     constructor(props) {
         super(props);
 
-        const categories = cardData.length ? [...new Set(cardData.map((item) => item.category))] : [];
-
         this.state = {
-            selectedCategory: categories[0] || null,
-            categories,
+            data: [],
+            selectedCategory: null,
+            categories: [],
+            isLoading: true,
         };
     }
+
+    async componentDidMount() {
+        try {
+            const data = await fetchMeals();
+            const categories = this.getCategories(data);
+
+            this.setState({
+                data,
+                categories,
+                selectedCategory: categories[0] || null,
+                isLoading: false,
+            });
+        } catch (error) {
+            console.error('Failed to load meals:', error);
+            this.setState({ isLoading: false });
+        }
+    }
+
+    getCategories = (data) => {
+        return [...new Set(data.map((item) => item.category))];
+    };
 
     selectCategory = (category) => {
         this.setState({ selectedCategory: category });
     };
 
     render() {
-        const { selectedCategory, categories } = this.state;
-        const filteredCards = selectedCategory ? cardData.filter((item) => item.category === selectedCategory) : [];
+        const { data, selectedCategory, categories, isLoading } = this.state;
+        const filteredCards = selectedCategory ? data.filter((item) => item.category === selectedCategory) : [];
 
         return (
             <section className={styles.menuSection}>
@@ -42,8 +63,16 @@ class MenuSection extends Component {
                         </Button>
                     ))}
                 </div>
-                {filteredCards.length > 0 ? <CardList cards={filteredCards} /> : <p className={styles.noItemsMessage}>No items available.</p>}
-                <Button>See more</Button>
+
+                {isLoading ? (
+                    <p>Loading menu...</p>
+                ) : filteredCards.length > 0 ? (
+                    <CardList cards={filteredCards} />
+                ) : (
+                    <p className={styles.noItemsMessage}>No items available.</p>
+                )}
+
+                {filteredCards.length > 0 && <Button>See more</Button>}
             </section>
         );
     }
