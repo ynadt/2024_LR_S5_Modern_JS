@@ -15,7 +15,7 @@ const Card = ({ name, price, description, image }) => {
                 <div className={styles.cardDescription}>{description}</div>
                 <div className={styles.cardActions}>
                     <input type="number" value="1" readOnly className={styles.quantityInput} />
-                    <Button label="Add to cart" />
+                    <Button>Add to cart</Button>
                 </div>
             </div>
         </div>

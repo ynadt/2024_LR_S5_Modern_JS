@@ -20,9 +20,13 @@ const MenuSection = () => {
                 <span> our store to place a pickup order. Fast and fresh food.</span>
             </p>
             <div className={styles.buttonRow}>
-                <Button label="Dessert" onClick={() => handleButtonClick('Dessert')} />
-                <Button label="Dinner" onClick={() => handleButtonClick('Dinner')} isActive={false} />
-                <Button label="Breakfast" onClick={() => handleButtonClick('Breakfast')} isActive={false} />
+                <Button onClick={() => handleButtonClick('Dessert')}>Dessert</Button>
+                <Button onClick={() => handleButtonClick('Dinner')} isActive={false}>
+                    Dinner
+                </Button>
+                <Button onClick={() => handleButtonClick('Breakfast')} isActive={false}>
+                    Breakfast
+                </Button>
             </div>
             <CardList />
             <Button label="See more" onClick={() => handleButtonClick('See more')} />
