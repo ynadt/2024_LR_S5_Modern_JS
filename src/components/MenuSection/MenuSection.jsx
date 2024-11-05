@@ -3,6 +3,7 @@ import Button from 'components/Button/Button.jsx';
 import CardList from 'components/CardList/CardList.jsx';
 import { fetchMeals } from 'services/api.js';
 import styles from './MenuSection.module.css';
+import { INITIAL_VISIBLE_COUNT, LOAD_MORE_COUNT } from 'src/constants.js';
 
 class MenuSection extends Component {
     constructor(props) {
@@ -12,7 +13,7 @@ class MenuSection extends Component {
             data: [],
             selectedCategory: null,
             categories: [],
-            visibleCount: 6,
+            visibleCount: INITIAL_VISIBLE_COUNT,
             isLoading: true,
         };
     }
@@ -39,12 +40,12 @@ class MenuSection extends Component {
     };
 
     selectCategory = (category) => {
-        this.setState({ selectedCategory: category, visibleCount: 6 });
+        this.setState({ selectedCategory: category, visibleCount: INITIAL_VISIBLE_COUNT });
     };
 
     loadMore = () => {
         this.setState((prevState) => ({
-            visibleCount: prevState.visibleCount + 6,
+            visibleCount: prevState.visibleCount + LOAD_MORE_COUNT,
         }));
     };
 
