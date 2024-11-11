@@ -1,10 +1,13 @@
 import { Component } from 'react';
+import { navItems } from 'data/headerData.js';
+import { CartContext } from 'contexts/CartContext.jsx';
 import styles from './AppHeader.module.css';
 import logoIcon from 'assets/icons/logo-icon.svg';
 import cartIcon from 'assets/icons/cart-icon.svg';
-import { navItems } from 'data/headerData.js';
 
 class AppHeader extends Component {
+    static contextType = CartContext;
+
     constructor(props) {
         super(props);
         this.state = {
@@ -18,6 +21,7 @@ class AppHeader extends Component {
 
     render() {
         const { isMenuOpen } = this.state;
+        const { cartCount } = this.context;
 
         return (
             <header className={styles.appHeader}>
@@ -40,7 +44,7 @@ class AppHeader extends Component {
                     </div>
                     <div className={styles.cartIconContainer}>
                         <img loading="lazy" src={cartIcon} alt="Cart" className={styles.cartIcon} />
-                        <span className={styles.cartCounter}>3</span>
+                        <span className={styles.cartCounter}>{cartCount}</span>
                     </div>
                 </nav>
             </header>

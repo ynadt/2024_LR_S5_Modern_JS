@@ -9,7 +9,7 @@ class CardList extends Component {
         return (
             <div className={styles.cardList}>
                 {cards.map((item) => (
-                    <Card key={item.id} name={item.meal} price={item.price} description={item.instructions} image={item.img} />
+                    <Card key={item.id} item={item} />
                 ))}
             </div>
         );
