@@ -18,11 +18,17 @@ class AppFooter extends Component {
                             {linkSections.map((section) => (
                                 <div key={section.title} className={styles.linkColumn}>
                                     <h4 className={styles.linkTitle}>{section.title}</h4>
-                                    {section.links.map((link) => (
-                                        <a key={link.label} href={link.url} className={styles.link}>
-                                            {link.label}
-                                        </a>
-                                    ))}
+                                    {section.links.map((link) =>
+                                        link.url === '#' ? (
+                                            <span key={link.label} className={styles.link}>
+                                                {link.label}
+                                            </span>
+                                        ) : (
+                                            <a key={link.label} href={link.url} className={styles.link} target="_blank" rel="noopener noreferrer">
+                                                {link.label}
+                                            </a>
+                                        )
+                                    )}
                                 </div>
                             ))}
                         </div>
