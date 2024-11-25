@@ -1,24 +1,14 @@
-import React, { Component } from 'react';
+import { createContext, useState } from 'react';
 
-const cartContext = React.createContext({ cartCount: 0 });
+const cartContext = createContext({ cartCount: 0, incrementCartCount: () => {} });
 
-class CartProvider extends Component {
-    state = {
-        cartCount: 0,
+const CartProvider = ({ children }) => {
+    const [cartCount, setCartCount] = useState(0);
+
+    const incrementCartCount = () => {
+        setCartCount((prevCount) => prevCount + 1);
     };
-
-    incrementCartCount = () => {
-        this.setState((prevState) => ({
-            cartCount: prevState.cartCount + 1,
-        }));
-    };
-
-    render() {
-        const { cartCount } = this.state;
-        const { incrementCartCount } = this;
-
-        return <cartContext.Provider value={{ cartCount, incrementCartCount }}>{this.props.children}</cartContext.Provider>;
-    }
-}
+    return <cartContext.Provider value={{ cartCount, incrementCartCount }}>{children}</cartContext.Provider>;
+};
 
 export { cartContext as CartContext, CartProvider };
