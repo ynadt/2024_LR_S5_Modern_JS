@@ -6,14 +6,15 @@ import styles from './Card.module.css';
 class Card extends Component {
     static contextType = CartContext;
 
-    handleAddToCart = () => {
+    addItemToCart = () => {
         const { incrementCartCount } = this.context;
         incrementCartCount();
     };
 
     render() {
-        const { item } = this.props;
-        const { meal, price, instructions, img } = item;
+        const {
+            item: { meal, price, instructions, img },
+        } = this.props;
 
         return (
             <div className={styles.card}>
@@ -28,7 +29,7 @@ class Card extends Component {
                     <div className={styles.cardDescription}>{instructions}</div>
                     <div className={styles.cardActions}>
                         <input type="number" defaultValue="1" readOnly className={styles.quantityInput} />
-                        <Button onClick={this.handleAddToCart}>Add to cart</Button>
+                        <Button onClick={this.addItemToCart}>Add to cart</Button>
                     </div>
                 </div>
             </div>
