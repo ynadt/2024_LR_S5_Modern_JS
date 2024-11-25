@@ -1,11 +1,15 @@
+import { Component } from 'react';
 import styles from './Button.module.css';
 
-const Button = ({ children, isActive = true, onClick }) => {
-    return (
-        <button className={`${styles.button} ${!isActive ? styles.inactive : ''}`} onClick={onClick}>
-            {children}
-        </button>
-    );
-};
+class Button extends Component {
+    render() {
+        const { children, isActive = true, onClick } = this.props;
+        return (
+            <button className={`${styles.button} ${!isActive ? styles.inactive : ''}`} onClick={onClick}>
+                {children}
+            </button>
+        );
+    }
+}
 
 export default Button;

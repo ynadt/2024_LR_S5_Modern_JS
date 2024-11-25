@@ -1,23 +1,23 @@
 .button {
-  padding: 10px 30px;
-  flex-shrink: 0;
-  color: #FFF;
-  background-color: #35B8BE;
-  border-radius: 6px;
-  border: 1px solid rgba(97, 114, 131, 0.20);
-  font-family: Inter, sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 20px;
-  cursor: pointer;
-  transition: all 0.3s ease;
+    padding: 10px 30px;
+    flex-shrink: 0;
+    color: #fff;
+    background-color: #35b8be;
+    border-radius: 6px;
+    border: 1px solid rgba(97, 114, 131, 0.2);
+    font-family: Inter, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .button:hover {
-  transform: scale(1.05);
+    transform: scale(1.05);
 }
 
 .inactive {
-  background-color: transparent;
-  color: #222222;
+    background-color: transparent;
+    color: #222222;
 }
