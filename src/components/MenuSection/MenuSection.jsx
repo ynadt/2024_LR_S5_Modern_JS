@@ -1,34 +1,31 @@
 import { useState, useEffect } from 'react';
 import Button from 'components/Button/Button.jsx';
 import CardList from 'components/CardList/CardList.jsx';
-import { fetchMeals } from 'services/api.js';
+import useFetchWithLogging from 'hooks/useFetchWithLogging.js';
 import styles from './MenuSection.module.css';
 import { INITIAL_VISIBLE_COUNT, LOAD_MORE_COUNT } from 'src/constants.js';
+import { BASE_URL } from 'services/api.js';
 
 const MenuSection = () => {
-    const [data, setData] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState(null);
-    const [categories, setCategories] = useState([]);
     const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE_COUNT);
-    const [isLoading, setIsLoading] = useState(true);
+
+    const { data, error, isLoading } = useFetchWithLogging(`${BASE_URL}/meals`);
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const fetchedData = await fetchMeals();
-                const uniqueCategories = [...new Set(fetchedData.map((item) => item.category))];
-                setData(fetchedData);
-                setCategories(uniqueCategories);
-                setSelectedCategory(uniqueCategories[0] || null);
-            } catch (error) {
-                console.error('Failed to load meals:', error);
-            } finally {
-                setIsLoading(false);
-            }
-        };
+        if (data && data.length > 0) {
+            const categories = [...new Set(data.map((item) => item.category))];
+            setSelectedCategory(categories[0]);
+        }
+    }, [data]);
 
-        fetchData();
-    }, []);
+    if (error) {
+        return <p>Error fetching meals: {error.message}</p>;
+    }
+
+    const categories = data ? [...new Set(data.map((item) => item.category))] : [];
+    const filteredCards = selectedCategory ? data.filter((item) => item.category === selectedCategory) : data || [];
+    const visibleCards = filteredCards.slice(0, visibleCount);
 
     const handleCategoryChange = (category) => {
         setSelectedCategory(category);
@@ -38,9 +35,6 @@ const MenuSection = () => {
     const handleLoadMore = () => {
         setVisibleCount((prevCount) => prevCount + LOAD_MORE_COUNT);
     };
-
-    const filteredCards = selectedCategory ? data.filter((item) => item.category === selectedCategory) : [];
-    const visibleCards = filteredCards.slice(0, visibleCount);
 
     return (
         <section className={styles.menuSection}>
