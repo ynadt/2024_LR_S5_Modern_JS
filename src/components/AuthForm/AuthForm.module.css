@@ -54,7 +54,16 @@
 .errorMessage {
     color: red;
     font-size: 0.875rem;
-    margin-top: 0.25rem;
+    margin-top: 0.15rem;
+    min-height: 1.25rem;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.errorMessage.visible {
+    visibility: visible;
+    opacity: 1;
 }
 
 .submitButton {

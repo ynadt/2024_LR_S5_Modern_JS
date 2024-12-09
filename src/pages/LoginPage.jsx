@@ -37,7 +37,7 @@ const LoginPage = () => {
             <section className={styles.container}>
                 <h2 className={styles.title}>Login</h2>
                 <AuthForm fields={loginFields} onSubmit={handleLogin} isSubmitting={isSigningIn} submitButtonText="Login" />
-                {error && <p className={styles.globalErrorMessage}>{error}</p>}
+                <p className={`${styles.globalErrorMessage} ${error ? styles.visible : ''}`}>{error}</p>
                 <div className={styles.register}>
                     <span>Don’t have an account? </span>
                     <Link to="/register" className={styles.registerLink}>

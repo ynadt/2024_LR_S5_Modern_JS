@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Button from 'components/Button/Button.jsx';
 import EyeIcon from 'src/assets/icons/eye-icon.svg';
 import EyeClosedIcon from 'src/assets/icons/eye-closed-icon.svg';
@@ -13,6 +13,7 @@ const AuthForm = ({ fields, onSubmit, isSubmitting, submitButtonText }) => {
     );
 
     const [errors, setErrors] = useState(() => ({}));
+    const [isFormValid, setIsFormValid] = useState(false);
     const [showPasswordField, setShowPasswordField] = useState(false);
 
     const handleChange = (e) => {
@@ -26,6 +27,18 @@ const AuthForm = ({ fields, onSubmit, isSubmitting, submitButtonText }) => {
             setErrors((prev) => ({ ...prev, [name]: '' }));
         }
     };
+
+    useEffect(() => {
+        const validateForm = () => {
+            const isValid = fields.every((field) => {
+                const value = formState[field.name];
+                return field.validation ? field.validation(value, formState) : true;
+            });
+            setIsFormValid(isValid);
+        };
+
+        validateForm();
+    }, [formState, fields]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -76,10 +89,10 @@ const AuthForm = ({ fields, onSubmit, isSubmitting, submitButtonText }) => {
                             />
                         )}
                     </div>
-                    {errors[field.name] && <p className={styles.errorMessage}>{errors[field.name]}</p>}
+                    <p className={`${styles.errorMessage} ${errors[field.name] ? styles.visible : ''}`}>{errors[field.name]}</p>
                 </div>
             ))}
-            <Button type="submit" disabled={isSubmitting} className={styles.submitButton}>
+            <Button type="submit" disabled={!isFormValid || isSubmitting} className={styles.submitButton}>
                 {isSubmitting ? 'Loading...' : submitButtonText}
             </Button>
         </form>

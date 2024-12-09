@@ -37,7 +37,7 @@ const RegisterPage = () => {
             <div className={styles.container}>
                 <h2 className={styles.title}>Register</h2>
                 <AuthForm fields={registerFields} onSubmit={handleRegister} isSubmitting={isRegistering} submitButtonText="Register" />
-                {error && <p className={styles.errorMessage}>{error}</p>}
+                <p className={`${styles.globalErrorMessage} ${error ? styles.visible : ''}`}>{error}</p>
                 <div className={styles.register}>
                     <span>Already have an account? </span>
                     <Link to="/login" className={styles.registerLink}>
