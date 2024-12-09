@@ -1,12 +1,3 @@
-import AppHeader from 'components/AppHeader/AppHeader.jsx';
-import AppFooter from 'components/AppFooter/AppFooter.jsx';
-
-const ErrorPage = () => (
-    <>
-        <AppHeader />
-        There will be 404 Page
-        <AppFooter />
-    </>
-);
+const ErrorPage = () => <>There will be 404 Page</>;
 
 export default ErrorPage;

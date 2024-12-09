@@ -1,0 +1,90 @@
+.section {
+    background-image: url('../assets/backgrounds/home_shape_bg.svg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    padding: 2rem;
+}
+
+.contentWrapper {
+    display: flex;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.textContent {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.heading {
+    font-size: 4rem;
+    font-weight: normal;
+    line-height: 4rem;
+    margin-bottom: 1rem;
+}
+
+.highlight {
+    color: #08090a;
+}
+
+.accent {
+    color: #35b8be;
+}
+
+.description {
+    color: #546285;
+    font-size: 1.1rem;
+    line-height: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.buttonContainer {
+    margin-bottom: 2rem;
+}
+
+.reviewSection {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.trustpilotLogo {
+    width: 110px;
+    height: auto;
+    margin-right: 1rem;
+}
+
+.reviewDetails {
+    display: flex;
+    font-size: 1rem;
+}
+
+.rating {
+    color: #35b8be;
+    margin-right: 0.5rem;
+}
+
+.imageContainer {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    padding: 2rem;
+}
+
+.heroImage {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+@media (max-width: 800px) {
+    .imageContainer {
+        display: none;
+    }
+}

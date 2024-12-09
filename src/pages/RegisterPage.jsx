@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from 'contexts/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
-import AppHeader from 'components/AppHeader/AppHeader.jsx';
-import AppFooter from 'components/AppFooter/AppFooter.jsx';
 import Button from 'components/Button/Button.jsx';
 import { validateEmail, validatePassword } from 'utils/validation';
 import GoogleIcon from 'src/assets/icons/google-icon.svg';
@@ -90,7 +88,6 @@ const RegisterPage = () => {
 
     return (
         <>
-            <AppHeader />
             <main className={styles.main}>
                 <div className={styles.container}>
                     <h2 className={styles.title}>Register</h2>
@@ -171,7 +168,6 @@ const RegisterPage = () => {
                     </Button>
                 </div>
             </main>
-            <AppFooter />
         </>
     );
 };
