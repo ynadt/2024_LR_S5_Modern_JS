@@ -1,6 +1,7 @@
 import { useState, useContext } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { navItems } from 'data/headerData.js';
+import { useAuth } from 'contexts/AuthContext';
 import { CartContext } from 'contexts/CartContext.jsx';
 import styles from './AppHeader.module.css';
 import logoIcon from 'assets/icons/logo-icon.svg';
@@ -11,8 +12,19 @@ import closeMenuIcon from 'assets/icons/close-menu-icon.svg';
 const AppHeader = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { cartCount } = useContext(CartContext);
+    const { user, logout } = useAuth();
+    const navigate = useNavigate();
 
     const toggleMenu = () => setIsMenuOpen((prev) => !prev);
+
+    const handleLogout = async () => {
+        try {
+            await logout();
+            navigate('/');
+        } catch (error) {
+            console.error('Error during logout:', error);
+        }
+    };
 
     return (
         <header className={styles.appHeader}>
@@ -27,16 +39,21 @@ const AppHeader = () => {
                     <img loading="lazy" src={closeMenuIcon} alt="Close Menu" className={styles.icon} />
                 </button>
                 <div className={styles.navLinks}>
-                    {navItems.map((item) => (
-                        <NavLink
-                            key={item.label}
-                            to={item.href}
-                            className={({ isActive }) => `${styles.navItem} ${isActive ? styles.activeNavItem : ''}`}
-                            onClick={() => setIsMenuOpen(false)} // Close menu on link click
-                        >
-                            {item.label}
-                        </NavLink>
-                    ))}
+                    {navItems
+                        .filter((item) => {
+                            if (user && (item.label === 'Login' || item.label === 'Register')) return false;
+                            return !(!user && item.label === 'Logout');
+                        })
+                        .map((item) => (
+                            <NavLink
+                                key={item.label}
+                                to={item.href}
+                                className={({ isActive }) => `${styles.navItem} ${isActive ? styles.activeNavItem : ''}`}
+                                onClick={item.label === 'Logout' ? handleLogout : () => setIsMenuOpen(false)}
+                            >
+                                {item.label}
+                            </NavLink>
+                        ))}
                 </div>
                 <div className={styles.cartIconContainer}>
                     <NavLink to="/cart">

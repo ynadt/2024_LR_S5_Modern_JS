@@ -49,7 +49,11 @@ const MenuSection = () => {
             </p>
             <div className={styles.buttonRow}>
                 {categories.map((category) => (
-                    <Button key={category} onClick={() => handleCategoryChange(category)} isActive={selectedCategory === category}>
+                    <Button
+                        key={category}
+                        onClick={() => handleCategoryChange(category)}
+                        className={selectedCategory !== category ? styles.inactiveCategory : ''}
+                    >
                         {category}
                     </Button>
                 ))}

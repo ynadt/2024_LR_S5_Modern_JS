@@ -4,4 +4,5 @@ export const navItems = [
     { label: 'Company', href: '/company' },
     { label: 'Login', href: '/login' },
     { label: 'Register', href: '/register' },
+    { label: 'Logout', href: '/' },
 ];

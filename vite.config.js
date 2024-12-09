@@ -15,6 +15,8 @@ export default defineConfig({
             src: path.resolve(__dirname, 'src'),
             hooks: path.resolve(__dirname, 'src/hooks'),
             router: path.resolve(__dirname, 'src/router'),
+            firebaseSetup: path.resolve(__dirname, 'src/firebaseSetup'),
+            utils: path.resolve(__dirname, 'src/utils'),
         },
     },
 });

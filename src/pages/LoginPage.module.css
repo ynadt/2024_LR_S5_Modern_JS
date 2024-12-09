@@ -1,0 +1,199 @@
+.main {
+    padding: 50px 10px;
+    background-image: url('src/assets/backgrounds/menu_bg.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    max-width: 400px;
+    margin: 0 auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.title {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: #35b8be;
+    font-weight: 700;
+}
+
+.form {
+    width: 100%;
+}
+
+.inputGroup {
+    margin-bottom: 1rem;
+}
+
+.label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: start;
+}
+
+.input {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.375rem;
+    transition: border-color 0.2s ease;
+}
+
+.input:focus {
+    border-color: #35b8be;
+    outline: none;
+}
+
+.input.invalid:focus {
+    border-color: red;
+    outline: none;
+}
+
+.invalid {
+    border-color: red;
+}
+
+.errorMessage {
+    color: red;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+.submitButton {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+    background-color: #35b8be;
+    color: white;
+    border: none;
+    border-radius: 0.375rem;
+    cursor: pointer;
+}
+
+.submitButton:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.orSeparator {
+    display: flex;
+    align-items: center;
+    margin: 1.5rem 0;
+    width: 100%;
+}
+
+.line {
+    flex: 1;
+    height: 1px;
+    background-color: #ccc;
+}
+
+.orText {
+    font-size: 1rem;
+    color: #555;
+    margin: 0 1rem;
+}
+
+.googleButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+    background-color: transparent;
+    color: black;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px #ddd solid;
+    border-radius: 0.375rem;
+    cursor: pointer;
+}
+
+.googleButton:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.googleIcon {
+    width: 20px;
+    height: 20px;
+    margin-right: 1rem;
+}
+
+.register {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.registerLink {
+    color: #35b8be;
+    text-decoration: none;
+}
+
+.signUpLink:hover {
+    text-decoration: underline;
+}
+
+.tooltip {
+    position: relative;
+    color: #35b8be;
+    cursor: pointer;
+    display: inline-block;
+    margin-left: 5px;
+}
+
+.clueIcon {
+    width: 25px;
+    height: auto;
+    cursor: pointer;
+}
+
+.tooltipText {
+    visibility: hidden;
+    width: 200px;
+    background-color: #35b8be;
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+    padding: 8px;
+    position: absolute;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 80%;
+    transition: opacity 0.3s;
+    font-size: 14px;
+    line-height: 1.2;
+    z-index: 1;
+}
+
+.tooltip:hover .tooltipText {
+    visibility: visible;
+    opacity: 1;
+}
+
+.passwordContainer {
+    position: relative;
+}
+
+.eyeIcon {
+    width: 30px;
+    height: auto;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
