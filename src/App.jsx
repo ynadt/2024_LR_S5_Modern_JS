@@ -1,14 +1,20 @@
 import './App.css';
-// import MenuPage from 'pages/MenuPage.jsx';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { CartProvider } from 'contexts/CartContext.jsx';
-import HomePage from 'pages/HomePage.jsx';
+import ProtectedRoute from 'router/ProtectedRoute.jsx';
+import routes from 'router/routerConfig.js';
 
 const App = () => (
     <CartProvider>
-        <div className="App">
-            {/*<MenuPage />*/}
-            <HomePage />
-        </div>
+        <Router>
+            <div className="App">
+                <Routes>
+                    {routes.map(({ path, element, protected: protectionType }) => (
+                        <Route key={path} path={path} element={<ProtectedRoute element={element} protectionType={protectionType} />} />
+                    ))}
+                </Routes>
+            </div>
+        </Router>
     </CartProvider>
 );
 

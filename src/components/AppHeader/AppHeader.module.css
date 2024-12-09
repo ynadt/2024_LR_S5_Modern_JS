@@ -162,3 +162,8 @@
         height: 45px;
     }
 }
+
+.activeNavItem {
+    color: #35b8be;
+    font-weight: bold;
+}
