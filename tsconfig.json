@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "allowJs": true,
+    "checkJs": false,
+    "allowImportingTsExtensions": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "assets/*": ["src/assets/*"],
+      "components/*": ["src/components/*"],
+      "contexts/*": ["src/contexts/*"],
+      "data/*": ["src/data/*"],
+      "pages/*": ["src/pages/*"],
+      "services/*": ["src/services/*"],
+      "src/*": ["src/*"],
+      "hooks/*": ["src/hooks/*"],
+      "router/*": ["src/router/*"],
+      "firebaseSetup/*": ["src/firebaseSetup/*"],
+      "utils/*": ["src/utils/*"],
+      "types/*": ["src/types/*"],
+      "store/*": ["src/store/*"]
+    }
+  },
+  "include": ["src/**/*", "eslint.config.js", "vite.config.ts", "src/types/globals.d.ts"],
+  "exclude": ["node_modules", "dist"]
+}
+

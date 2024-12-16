@@ -1,6 +1,6 @@
-import Button from 'components/Button/Button.jsx';
-import foodImage from 'src/assets/backgrounds/home_bg.png';
-import trustpilotIcon from 'src/assets/icons/trustpilot-icon.svg';
+import Button from 'components/Button/Button.tsx';
+import foodImage from 'assets/backgrounds/home_bg.png';
+import trustpilotIcon from 'assets/icons/trustpilot-icon.svg';
 import styles from 'pages/HomePage.module.css';
 
 const HomePage = () => {

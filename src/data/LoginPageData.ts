@@ -1,5 +1,5 @@
 import ClueIcon from 'src/assets/icons/clue-icon.svg';
-import { validateEmail, validatePassword } from 'utils/validation.js';
+import { validateEmail, validatePassword } from 'utils/validationUtils.ts';
 
 const loginFields = [
     {

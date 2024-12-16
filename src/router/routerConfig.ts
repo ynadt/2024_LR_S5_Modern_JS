@@ -1,11 +1,18 @@
-import HomePage from 'pages/HomePage.jsx';
-import RegisterPage from 'pages/RegisterPage.jsx';
-import LoginPage from 'pages/LoginPage.jsx';
-import MenuPage from 'pages/MenuPage.jsx';
-import CartPage from 'pages/CartPage.jsx';
-import ErrorPage from 'pages/ErrorPage.jsx';
+import { ComponentType } from 'react';
+import HomePage from 'pages/HomePage.js';
+import RegisterPage from 'pages/RegisterPage.js';
+import LoginPage from 'pages/LoginPage.js';
+import MenuPage from 'pages/MenuPage.js';
+import CartPage from 'pages/CartPage.js';
+import ErrorPage from 'pages/ErrorPage.js';
 
-const routes = [
+interface RouteConfig {
+    path: string;
+    element: ComponentType;
+    protected?: 'auth' | 'guest';
+}
+
+const routes: RouteConfig[] = [
     {
         path: '/',
         element: HomePage,

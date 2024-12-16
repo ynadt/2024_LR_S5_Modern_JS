@@ -1,5 +1,9 @@
 import ClueIcon from 'src/assets/icons/clue-icon.svg';
-import { validateEmail, validatePassword } from 'utils/validation.js';
+import { validateEmail, validatePassword } from 'utils/validationUtils.ts';
+
+interface FormState {
+    [key: string]: string;
+}
 
 const registerFields = [
     {
@@ -8,7 +12,7 @@ const registerFields = [
         type: 'email',
         placeholder: 'Enter your email',
         autoComplete: 'email',
-        validation: validateEmail,
+        validation: (value: string) => validateEmail(value),
         errorMessage: 'Please enter a valid email address.',
         tooltip: {
             icon: ClueIcon,
@@ -21,7 +25,7 @@ const registerFields = [
         type: 'password',
         placeholder: 'Enter your password',
         autoComplete: 'new-password',
-        validation: validatePassword,
+        validation: (value: string) => validatePassword(value),
         errorMessage: 'Password must meet the required complexity.',
         tooltip: {
             icon: ClueIcon,
@@ -34,7 +38,7 @@ const registerFields = [
         type: 'password',
         placeholder: 'Confirm your password',
         autoComplete: 'new-password',
-        validation: (value, formState) => value === formState.password,
+        validation: (value: string, formState: FormState) => value === formState.password,
         errorMessage: 'Passwords must match.',
         tooltip: {
             icon: ClueIcon,

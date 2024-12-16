@@ -1,33 +1,45 @@
 import { useEffect, useState } from 'react';
-import { INITIAL_VISIBLE_COUNT, LOAD_MORE_COUNT } from 'src/constants.js';
-import { BASE_URL } from 'services/api.js';
-import Button from 'components/Button/Button.jsx';
-import CardList from 'components/CardList/CardList.jsx';
-import useFetchWithLogging from 'hooks/useFetchWithLogging.js';
+import { useDispatch } from 'react-redux';
+import { INITIAL_VISIBLE_COUNT, LOAD_MORE_COUNT } from 'data/constants.ts';
+import { BASE_URL } from 'services/api.ts';
+import { addItemToCart } from 'store/slices/cartSlice.ts';
+import useFetchWithLogging from 'hooks/useFetchWithLogging.ts';
+import Button from 'components/Button/Button.tsx';
+import Card from 'components/Card/Card.tsx';
 import styles from 'pages/MenuPage.module.css';
 
+interface Meal {
+    id: string;
+    category: string;
+    meal: string;
+    price: number;
+    img: string;
+    instructions: string;
+}
+
 const MenuPage = () => {
-    const [selectedCategory, setSelectedCategory] = useState(null);
+    const dispatch = useDispatch();
+    const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
     const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE_COUNT);
 
-    const { data, error, isLoading } = useFetchWithLogging(`${BASE_URL}/meals`);
+    const { data: meals = [], error, isLoading } = useFetchWithLogging<Meal[] | null>(`${BASE_URL}/meals`);
 
     useEffect(() => {
-        if (data && data.length > 0) {
-            const categories = [...new Set(data.map((item) => item.category))];
+        if (meals && meals.length > 0) {
+            const categories = [...new Set(meals.map((item) => item.category))];
             setSelectedCategory(categories[0]);
         }
-    }, [data]);
+    }, [meals]);
 
     if (error) {
         return <p>Error fetching meals: {error.message}</p>;
     }
 
-    const categories = data ? [...new Set(data.map((item) => item.category))] : [];
-    const filteredCards = selectedCategory ? data.filter((item) => item.category === selectedCategory) : data || [];
+    const categories = meals ? [...new Set(meals.map((item) => item.category))] : [];
+    const filteredCards = meals && selectedCategory ? meals.filter((item) => item.category === selectedCategory) : meals || [];
     const visibleCards = filteredCards.slice(0, visibleCount);
 
-    const handleCategoryChange = (category) => {
+    const handleCategoryChange = (category: string) => {
         setSelectedCategory(category);
         setVisibleCount(INITIAL_VISIBLE_COUNT);
     };
@@ -63,7 +75,22 @@ const MenuPage = () => {
                 <p>Loading menu...</p>
             ) : visibleCards.length > 0 ? (
                 <>
-                    <CardList cards={visibleCards} />
+                    <div className={styles.cardList}>
+                        {visibleCards.map((meal) => (
+                            <Card
+                                key={meal.id}
+                                item={meal}
+                                onAddToCart={(quantity) =>
+                                    dispatch(
+                                        addItemToCart({
+                                            ...meal,
+                                            quantity,
+                                        })
+                                    )
+                                }
+                            />
+                        ))}
+                    </div>
                     {visibleCards.length < filteredCards.length && <Button onClick={handleLoadMore}>See more</Button>}
                 </>
             ) : (

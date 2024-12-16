@@ -1,0 +1,47 @@
+.cart {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.customTitle {
+    font-size: 2rem;
+    color: #333;
+}
+
+.cartProductsBox {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.cartEmpty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+}
+
+.cartEmptyMessage {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.cartEmptySubmessage {
+    font-size: 1.2rem;
+    color: #666;
+}
+
+.cartBottomBox {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.cartTotal {
+    font-weight: 600;
+}

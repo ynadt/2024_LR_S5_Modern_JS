@@ -1,6 +1,6 @@
-import styles from './AppFooter.module.css';
-import LogoIcon from 'assets/icons/logo-icon.svg';
 import { linkSections, socialIcons } from 'data/footerData.js';
+import LogoIcon from 'assets/icons/logo-icon.svg';
+import styles from './AppFooter.module.css';
 
 const AppFooter = () => {
     return (

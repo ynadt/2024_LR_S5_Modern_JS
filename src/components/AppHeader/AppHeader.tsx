@@ -1,29 +1,36 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import { navItems } from 'data/headerData.js';
-import { useAuth } from 'contexts/AuthContext';
-import { CartContext } from 'contexts/CartContext.jsx';
-import styles from './AppHeader.module.css';
+import { AppDispatch, RootState } from 'store/store.ts';
+import { logout } from 'store/slices/userSlice';
+
 import logoIcon from 'assets/icons/logo-icon.svg';
 import cartIcon from 'assets/icons/cart-icon.svg';
 import burgerMenuIcon from 'assets/icons/burger-menu-icon.svg';
 import closeMenuIcon from 'assets/icons/close-menu-icon.svg';
+import styles from './AppHeader.module.css';
 
 const AppHeader = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const { cartCount } = useContext(CartContext);
-    const { user, logout } = useAuth();
+    const { totalQuantity: cartCount } = useSelector((state: RootState) => state.cart);
+    const { user } = useSelector((state: RootState) => state.user);
+    const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
 
     const toggleMenu = () => setIsMenuOpen((prev) => !prev);
 
     const handleLogout = async () => {
         try {
-            await logout();
+            await dispatch(logout()).unwrap();
             navigate('/');
         } catch (error) {
             console.error('Error during logout:', error);
         }
+    };
+
+    const handleCartClick = () => {
+        navigate('/cart');
     };
 
     return (
@@ -55,11 +62,9 @@ const AppHeader = () => {
                             </NavLink>
                         ))}
                 </div>
-                <div className={styles.cartIconContainer}>
-                    <NavLink to="/cart">
-                        <img loading="lazy" src={cartIcon} alt="Cart" className={styles.cartIcon} />
-                        <span className={styles.cartCounter}>{cartCount}</span>
-                    </NavLink>
+                <div className={styles.cartIconContainer} onClick={handleCartClick}>
+                    <img loading="lazy" src={cartIcon} alt="Cart" className={styles.cartIcon} />
+                    <span className={styles.cartCounter}>{cartCount}</span>
                 </div>
             </nav>
         </header>

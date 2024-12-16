@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
 const getTimestamp = () => new Date().toISOString();
 
-const saveApiLogToLocalStorage = (logMessage, response, result) => {
+const saveApiLogToLocalStorage = (logMessage: string, response: Response, result: unknown) => {
     const timestamp = getTimestamp();
     const apiResponseLog = {
         timestamp,
@@ -13,7 +13,7 @@ const saveApiLogToLocalStorage = (logMessage, response, result) => {
 
     console.log(apiResponseLog);
 
-    const previousLogs = JSON.parse(localStorage.getItem('apiResponseLogs')) || [];
+    const previousLogs = JSON.parse(localStorage.getItem('apiResponseLogs') || '[]');
 
     const newLogEntry = {
         request: logMessage,
@@ -28,7 +28,13 @@ const saveApiLogToLocalStorage = (logMessage, response, result) => {
     localStorage.setItem('apiResponseLogs', JSON.stringify(updatedLogs));
 };
 
-const fetchAndLogData = async (url, logMessage, setStatus, setData, setError) => {
+const fetchAndLogData = async <T>(
+    url: string,
+    logMessage: string,
+    setStatus: (status: number) => void,
+    setData: Dispatch<SetStateAction<T | null>>,
+    setError: Dispatch<SetStateAction<Error | null>>
+) => {
     try {
         const response = await fetch(url);
         setStatus(response.status);
@@ -37,22 +43,23 @@ const fetchAndLogData = async (url, logMessage, setStatus, setData, setError) =>
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
 
-        const result = await response.json();
+        const result: T = await response.json();
         saveApiLogToLocalStorage(logMessage, response, result);
         setData(result);
     } catch (err) {
-        setError(err);
+        const error = err instanceof Error ? err : new Error(String(err));
+        setError(error);
         const timestamp = getTimestamp();
         console.error('Failed to fetch data:', err);
         console.log({ timestamp, message: 'API Request: Request failed', payload: err });
     }
 };
 
-const useFetchWithLogging = (url) => {
-    const [data, setData] = useState(null);
-    const [error, setError] = useState(null);
+const useFetchWithLogging = <T>(url: string) => {
+    const [data, setData] = useState<T | null>(null);
+    const [error, setError] = useState<Error | null>(null);
     const [isLoading, setIsLoading] = useState(true);
-    const [status, setStatus] = useState(null);
+    const [status, setStatus] = useState<number | null>(null);
 
     useEffect(() => {
         const startFetching = () => {
@@ -61,7 +68,7 @@ const useFetchWithLogging = (url) => {
             const logMessage = { timestamp, message: 'API Request: Fetching data', payload: url };
             console.log(logMessage);
 
-            fetchAndLogData(url, logMessage, setStatus, setData, setError).finally(() => setIsLoading(false));
+            fetchAndLogData(url, JSON.stringify(logMessage), setStatus, setData, setError).finally(() => setIsLoading(false));
         };
 
         startFetching();

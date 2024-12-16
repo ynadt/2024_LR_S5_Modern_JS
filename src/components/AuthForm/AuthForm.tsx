@@ -1,28 +1,52 @@
-import { useState, useEffect } from 'react';
-import Button from 'components/Button/Button.jsx';
+import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
+import Button from 'components/Button/Button.tsx';
 import EyeIcon from 'src/assets/icons/eye-icon.svg';
 import EyeClosedIcon from 'src/assets/icons/eye-closed-icon.svg';
 import styles from 'components/AuthForm/AuthForm.module.css';
 
-const AuthForm = ({ fields, onSubmit, isSubmitting, submitButtonText }) => {
-    const [formState, setFormState] = useState(() =>
-        fields.reduce((acc, field) => {
-            acc[field.name] = '';
-            return acc;
-        }, {})
+interface Field {
+    name: string;
+    label: string;
+    type: string;
+    placeholder?: string;
+    autoComplete?: string;
+    validation?: (value: string, formState: Record<string, string>) => boolean;
+    errorMessage?: string;
+    tooltip?: {
+        icon: string;
+        text: string;
+    };
+}
+
+interface AuthFormProps {
+    fields: Field[];
+    onSubmit: (formData: Record<string, string>) => void;
+    isSubmitting: boolean;
+    submitButtonText: string;
+}
+
+const AuthForm: React.FC<AuthFormProps> = ({ fields, onSubmit, isSubmitting, submitButtonText }) => {
+    const [formState, setFormState] = useState<Record<string, string>>(() =>
+        fields.reduce(
+            (acc, field) => {
+                acc[field.name] = '';
+                return acc;
+            },
+            {} as Record<string, string>
+        )
     );
 
-    const [errors, setErrors] = useState(() => ({}));
+    const [errors, setErrors] = useState<Record<string, string>>({});
     const [isFormValid, setIsFormValid] = useState(false);
     const [showPasswordField, setShowPasswordField] = useState(false);
 
-    const handleChange = (e) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setFormState((prev) => ({ ...prev, [name]: value }));
 
         const field = fields.find((f) => f.name === name);
         if (field?.validation && !field.validation(value, formState)) {
-            setErrors((prev) => ({ ...prev, [name]: field.errorMessage }));
+            setErrors((prev) => ({ ...prev, [name]: field.errorMessage || '' }));
         } else {
             setErrors((prev) => ({ ...prev, [name]: '' }));
         }
@@ -40,14 +64,14 @@ const AuthForm = ({ fields, onSubmit, isSubmitting, submitButtonText }) => {
         validateForm();
     }, [formState, fields]);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const newErrors = {};
+        const newErrors: Record<string, string> = {};
         let isValid = true;
 
         fields.forEach((field) => {
             if (field.validation && !field.validation(formState[field.name], formState)) {
-                newErrors[field.name] = field.errorMessage;
+                newErrors[field.name] = field.errorMessage || '';
                 isValid = false;
             }
         });

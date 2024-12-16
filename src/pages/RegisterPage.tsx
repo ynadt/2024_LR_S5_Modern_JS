@@ -1,16 +1,17 @@
-import { useState, useEffect } from 'react';
-import { useAuth } from 'contexts/AuthContext';
+import React, { useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import AuthForm from 'components/AuthForm/AuthForm.jsx';
-import Button from 'components/Button/Button.jsx';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState, AppDispatch } from 'store/store.ts';
+import { registerWithEmail, loginWithGoogle } from 'store/slices/userSlice.ts';
+import AuthForm from 'components/AuthForm/AuthForm.tsx';
+import Button from 'components/Button/Button.js';
+import registerFields from 'data/RegisterPageData.js';
 import GoogleIcon from 'src/assets/icons/google-icon.svg';
 import styles from 'pages/LoginPage.module.css';
-import registerFields from 'data/RegisterPageData.js';
 
-const RegisterPage = () => {
-    const { registerWithEmail, loginWithGoogle, user } = useAuth();
-    const [isRegistering, setIsRegistering] = useState(false);
-    const [error, setError] = useState(null);
+const RegisterPage: React.FC = () => {
+    const dispatch = useDispatch<AppDispatch>();
+    const { user, error, loading } = useSelector((state: RootState) => state.user);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -19,16 +20,21 @@ const RegisterPage = () => {
         }
     }, [user, navigate]);
 
-    const handleRegister = async (formData) => {
+    const handleRegister = async (formData: Record<string, string>) => {
         const { email, password } = formData;
-        setIsRegistering(true);
-        setError(null);
+
         try {
-            await registerWithEmail(email, password);
+            await dispatch(registerWithEmail({ email, password })).unwrap();
         } catch (err) {
-            setError(err.message);
-        } finally {
-            setIsRegistering(false);
+            console.error('Registration failed:', err);
+        }
+    };
+
+    const handleGoogleLogin = async () => {
+        try {
+            await dispatch(loginWithGoogle()).unwrap();
+        } catch (err) {
+            console.error('Google login failed:', err);
         }
     };
 
@@ -36,8 +42,8 @@ const RegisterPage = () => {
         <section className={styles.section}>
             <div className={styles.container}>
                 <h2 className={styles.title}>Register</h2>
-                <AuthForm fields={registerFields} onSubmit={handleRegister} isSubmitting={isRegistering} submitButtonText="Register" />
-                <p className={`${styles.globalErrorMessage} ${error ? styles.visible : ''}`}>{error}</p>
+                <AuthForm fields={registerFields} onSubmit={handleRegister} isSubmitting={loading} submitButtonText="Register" />
+                {error && <p className={styles.errorMessage}>{error.message}</p>}
                 <div className={styles.register}>
                     <span>Already have an account? </span>
                     <Link to="/login" className={styles.registerLink}>
@@ -49,7 +55,7 @@ const RegisterPage = () => {
                     <span className={styles.orText}>OR</span>
                     <div className={styles.line}></div>
                 </div>
-                <Button onClick={loginWithGoogle} disabled={isRegistering} className={styles.googleButton}>
+                <Button onClick={handleGoogleLogin} disabled={loading} className={styles.googleButton}>
                     <img src={GoogleIcon} alt="Google Icon" className={styles.googleIcon} />
                     Continue with Google
                 </Button>
