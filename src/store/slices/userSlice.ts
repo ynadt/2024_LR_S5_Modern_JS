@@ -100,12 +100,7 @@ export const registerWithEmail = createAsyncThunk<User, { email: string; passwor
 const userSlice = createSlice({
     name: 'user',
     initialState,
-    reducers: {
-        // setUser(state, action: PayloadAction<User | null>) {
-        //     state.user = action.payload;
-        //     state.error = null;
-        // },
-    },
+    reducers: {},
     extraReducers: (builder) => {
         builder
             .addMatcher(isAnyOf(loginWithEmail.pending, loginWithGoogle.pending, logout.pending), (state) => {

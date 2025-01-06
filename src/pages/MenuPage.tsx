@@ -1,39 +1,35 @@
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { INITIAL_VISIBLE_COUNT, LOAD_MORE_COUNT } from 'data/constants.ts';
-import { BASE_URL } from 'services/api.ts';
 import { addItemToCart } from 'store/slices/cartSlice.ts';
-import useFetchWithLogging from 'hooks/useFetchWithLogging.ts';
+import { fetchProducts } from 'store/slices/productsSlice.ts';
+import { RootState, AppDispatch } from 'store/store.ts';
 import Button from 'components/Button/Button.tsx';
 import Card from 'components/Card/Card.tsx';
-import { CartItem } from 'types/types.ts';
 import styles from 'pages/MenuPage.module.css';
 
-interface Meal extends Omit<CartItem, 'quantity'> {
-    category: string;
-}
-
 const MenuPage = () => {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
+    const { items: products, isLoading, error } = useSelector((state: RootState) => state.products);
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
     const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE_COUNT);
 
-    const { data: meals = [], error, isLoading } = useFetchWithLogging<Meal[] | null>(`${BASE_URL}/meals`);
+    useEffect(() => {
+        if (products.length === 0) {
+            dispatch(fetchProducts());
+        }
+    }, [dispatch, products.length]);
 
     useEffect(() => {
-        if (meals && meals.length > 0) {
-            const categories = [...new Set(meals.map((item) => item.category))];
+        if (products.length > 0) {
+            const categories = [...new Set(products.map((item) => item.category))];
             setSelectedCategory(categories[0]);
         }
-    }, [meals]);
+    }, [products]);
 
-    if (error) {
-        return <p>Error fetching meals: {error.message}</p>;
-    }
-
-    const categories = meals ? [...new Set(meals.map((item) => item.category))] : [];
-    const filteredCards = meals && selectedCategory ? meals.filter((item) => item.category === selectedCategory) : meals || [];
-    const visibleCards = filteredCards.slice(0, visibleCount);
+    const categories = products.length > 0 ? [...new Set(products.map((item) => item.category))] : [];
+    const filteredProducts = selectedCategory ? products.filter((product) => product.category === selectedCategory) : products;
+    const visibleProducts = filteredProducts.slice(0, visibleCount);
 
     const handleCategoryChange = (category: string) => {
         setSelectedCategory(category);
@@ -43,6 +39,10 @@ const MenuPage = () => {
     const handleLoadMore = () => {
         setVisibleCount((prevCount) => prevCount + LOAD_MORE_COUNT);
     };
+
+    if (error) {
+        return <p>Error fetching products: {error}</p>;
+    }
 
     return (
         <section className={styles.menuSection}>
@@ -69,17 +69,17 @@ const MenuPage = () => {
 
             {isLoading ? (
                 <p>Loading menu...</p>
-            ) : visibleCards.length > 0 ? (
+            ) : visibleProducts.length > 0 ? (
                 <>
                     <div className={styles.cardList}>
-                        {visibleCards.map((meal) => (
+                        {visibleProducts.map((product) => (
                             <Card
-                                key={meal.id}
-                                item={meal}
+                                key={product.id}
+                                item={product}
                                 onAddToCart={(quantity) =>
                                     dispatch(
                                         addItemToCart({
-                                            ...meal,
+                                            ...product,
                                             quantity,
                                         })
                                     )
@@ -87,7 +87,7 @@ const MenuPage = () => {
                             />
                         ))}
                     </div>
-                    {visibleCards.length < filteredCards.length && <Button onClick={handleLoadMore}>See more</Button>}
+                    {visibleProducts.length < filteredProducts.length && <Button onClick={handleLoadMore}>See more</Button>}
                 </>
             ) : (
                 <p className={styles.noItemsMessage}>No items available.</p>
