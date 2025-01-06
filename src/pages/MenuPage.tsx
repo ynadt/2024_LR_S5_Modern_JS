@@ -6,15 +6,11 @@ import { addItemToCart } from 'store/slices/cartSlice.ts';
 import useFetchWithLogging from 'hooks/useFetchWithLogging.ts';
 import Button from 'components/Button/Button.tsx';
 import Card from 'components/Card/Card.tsx';
+import { CartItem } from 'types/types.ts';
 import styles from 'pages/MenuPage.module.css';
 
-interface Meal {
-    id: string;
+interface Meal extends Omit<CartItem, 'quantity'> {
     category: string;
-    meal: string;
-    price: number;
-    img: string;
-    instructions: string;
 }
 
 const MenuPage = () => {

@@ -1,16 +1,10 @@
 import { ChangeEvent, FC } from 'react';
 import Button from 'components/Button/Button.tsx';
+import { CartItem as CartItemType } from 'types/types.ts';
 import styles from './CartItem.module.css';
 
 interface CartItemProps {
-    product: {
-        id: string;
-        meal: string;
-        price: number;
-        img: string;
-        instructions: string;
-        quantity: number;
-    };
+    product: CartItemType;
     removeClickHandler: (id: string) => void;
     inputChangeHandler: (id: string, quantity: number) => void;
 }

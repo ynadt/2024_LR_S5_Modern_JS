@@ -2,12 +2,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import CartItem from 'components/CartItem/CartItem.tsx';
 import Button from 'components/Button/Button.tsx';
-import { RootState } from 'store/store.ts';
+import { selectCartItems, selectCartTotalQuantity, selectCartTotalPrice } from 'store/selectors/cartSelectors.ts';
 import { removeItemFromCart, changeItemQuantity, clearCart } from 'store/slices/cartSlice.ts';
 import styles from './CartPage.module.css';
 
 const CartPage = () => {
-    const { items, totalQuantity, totalPrice } = useSelector((state: RootState) => state.cart);
+    const items = useSelector(selectCartItems);
+    const totalQuantity = useSelector(selectCartTotalQuantity);
+    const totalPrice = useSelector(selectCartTotalPrice);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 

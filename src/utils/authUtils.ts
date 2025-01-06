@@ -1,32 +1,33 @@
 import { FirebaseError } from 'firebase/app';
 
-type AuthErrorCodes =
-    | 'auth/email-already-in-use'
-    | 'auth/invalid-email'
-    | 'auth/user-not-found'
-    | 'auth/wrong-password'
-    | 'auth/weak-password'
-    | 'auth/too-many-requests'
-    | 'auth/operation-not-allowed'
-    | 'auth/network-request-failed'
-    | 'auth/popup-closed-by-user'
-    | 'auth/cancelled-popup-request'
-    | 'auth/requires-recent-login'
-    | 'auth/invalid-credential';
+export enum AuthErrorCodes {
+    EMAIL_ALREADY_IN_USE = 'auth/email-already-in-use',
+    INVALID_EMAIL = 'auth/invalid-email',
+    USER_NOT_FOUND = 'auth/user-not-found',
+    WRONG_PASSWORD = 'auth/wrong-password',
+    WEAK_PASSWORD = 'auth/weak-password',
+    TOO_MANY_REQUESTS = 'auth/too-many-requests',
+    OPERATION_NOT_ALLOWED = 'auth/operation-not-allowed',
+    NETWORK_REQUEST_FAILED = 'auth/network-request-failed',
+    POPUP_CLOSED_BY_USER = 'auth/popup-closed-by-user',
+    CANCELLED_POPUP_REQUEST = 'auth/cancelled-popup-request',
+    REQUIRES_RECENT_LOGIN = 'auth/requires-recent-login',
+    INVALID_CREDENTIAL = 'auth/invalid-credential',
+}
 
 const errorMessages: Record<AuthErrorCodes, string> = {
-    'auth/email-already-in-use': 'This email address is already registered. Please log in or use a different email.',
-    'auth/invalid-email': 'The email address is not valid. Please enter a valid email.',
-    'auth/user-not-found': 'No user found with this email address. Please check your email or register.',
-    'auth/wrong-password': 'Incorrect password. Please try again or reset your password.',
-    'auth/weak-password': 'The password is too weak. It should be at least 6 characters long.',
-    'auth/too-many-requests': 'Too many unsuccessful login attempts. Please try again later or reset your password.',
-    'auth/operation-not-allowed': 'This operation is not allowed. Please contact support.',
-    'auth/network-request-failed': 'A network error occurred. Please check your internet connection and try again.',
-    'auth/popup-closed-by-user': 'The sign-in popup was closed before completing the sign-in. Please try again.',
-    'auth/cancelled-popup-request': 'The sign-in process was canceled. Please try again.',
-    'auth/requires-recent-login': 'This operation requires recent authentication. Please log in again.',
-    'auth/invalid-credential': 'The provided credentials are invalid. Please check your email and password and try again.',
+    [AuthErrorCodes.EMAIL_ALREADY_IN_USE]: 'This email address is already registered. Please log in or use a different email.',
+    [AuthErrorCodes.INVALID_EMAIL]: 'The email address is not valid. Please enter a valid email.',
+    [AuthErrorCodes.USER_NOT_FOUND]: 'No user found with this email address. Please check your email or register.',
+    [AuthErrorCodes.WRONG_PASSWORD]: 'Incorrect password. Please try again or reset your password.',
+    [AuthErrorCodes.WEAK_PASSWORD]: 'The password is too weak. It should be at least 6 characters long.',
+    [AuthErrorCodes.TOO_MANY_REQUESTS]: 'Too many unsuccessful login attempts. Please try again later or reset your password.',
+    [AuthErrorCodes.OPERATION_NOT_ALLOWED]: 'This operation is not allowed. Please contact support.',
+    [AuthErrorCodes.NETWORK_REQUEST_FAILED]: 'A network error occurred. Please check your internet connection and try again.',
+    [AuthErrorCodes.POPUP_CLOSED_BY_USER]: 'The sign-in popup was closed before completing the sign-in. Please try again.',
+    [AuthErrorCodes.CANCELLED_POPUP_REQUEST]: 'The sign-in process was canceled. Please try again.',
+    [AuthErrorCodes.REQUIRES_RECENT_LOGIN]: 'This operation requires recent authentication. Please log in again.',
+    [AuthErrorCodes.INVALID_CREDENTIAL]: 'The provided credentials are invalid. Please check your email and password and try again.',
 };
 
 export const getErrorMessage = (error: FirebaseError | string | null | undefined): string => {
@@ -44,24 +45,3 @@ export const getErrorMessage = (error: FirebaseError | string | null | undefined
 
     return 'An unexpected error occurred. Please try again.';
 };
-
-// export const retryWithDelay = async <T>(operation: () => Promise<T>, retries = 3, delay = 1000): Promise<T> => {
-//     for (let attempt = 0; attempt <= retries; attempt++) {
-//         try {
-//             // Attempt the operation
-//             return await operation();
-//         } catch (err) {
-//             // If it's not a retryable error or we've exhausted retries, rethrow
-//             if (err instanceof Error && (err.message !== 'auth/network-request-failed' || attempt === retries)) {
-//                 throw err;
-//             }
-//
-//             // Otherwise, wait for the specified delay before retrying
-//             if (attempt < retries) {
-//                 await new Promise((resolve) => setTimeout(resolve, delay));
-//             }
-//         }
-//     }
-//
-//     throw new Error('Operation failed after all retries.');
-// };

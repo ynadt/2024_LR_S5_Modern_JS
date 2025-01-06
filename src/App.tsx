@@ -6,13 +6,13 @@ import routes from 'router/routerConfig.js';
 
 const App = () => (
     <Router>
-        <AppLayout>
-            <Routes>
+        <Routes>
+            <Route element={<AppLayout />}>
                 {routes.map(({ path, element, protected: protectionType }) => (
                     <Route key={path} path={path} element={<ProtectedRoute element={element} protectionType={protectionType} />} />
                 ))}
-            </Routes>
-        </AppLayout>
+            </Route>
+        </Routes>
     </Router>
 );
 

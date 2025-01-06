@@ -3,7 +3,7 @@ export const validateEmail = (email: string) => {
     return emailRegex.test(email);
 };
 
-export const validatePassword = (password: string) => {
+export const validatePassword = (password: string): boolean => {
     const passwordRegex = /^[A-Za-z0-9]{6,4096}$/;
     const hasUpperCase = /[A-Z]/.test(password);
     const hasLowerCase = /[a-z]/.test(password);

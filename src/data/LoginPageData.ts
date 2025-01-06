@@ -1,7 +1,23 @@
 import ClueIcon from 'src/assets/icons/clue-icon.svg';
 import { validateEmail, validatePassword } from 'utils/validationUtils.ts';
 
-const loginFields = [
+interface Tooltip {
+    icon: string;
+    text: string;
+}
+
+interface LoginField {
+    name: string;
+    label: string;
+    type: string;
+    placeholder?: string;
+    autoComplete?: string;
+    validation: (value: string) => boolean;
+    errorMessage: string;
+    tooltip?: Tooltip;
+}
+
+const loginFields: LoginField[] = [
     {
         name: 'email',
         label: 'Email',

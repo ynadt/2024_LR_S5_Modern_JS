@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { navItems } from 'data/headerData.js';
 import { AppDispatch, RootState } from 'store/store.ts';
 import { logout } from 'store/slices/userSlice';
+import { selectCartTotalQuantity } from 'store/selectors/cartSelectors';
 
 import logoIcon from 'assets/icons/logo-icon.svg';
 import cartIcon from 'assets/icons/cart-icon.svg';
@@ -13,7 +14,7 @@ import styles from './AppHeader.module.css';
 
 const AppHeader = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const { totalQuantity: cartCount } = useSelector((state: RootState) => state.cart);
+    const cartCount = useSelector(selectCartTotalQuantity);
     const { user } = useSelector((state: RootState) => state.user);
     const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
