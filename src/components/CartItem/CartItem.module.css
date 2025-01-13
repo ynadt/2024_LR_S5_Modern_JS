@@ -1,11 +1,17 @@
 .cartItem {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 15px;
-    border: 1px solid #e0e0e0;
+    border: 1px solid rgba(53, 184, 190, 0.15);
     padding: 15px;
     border-radius: 10px;
     background-color: #fff;
+}
+
+.cartItemImgContainer {
+    display: flex;
+    align-items: center;
 }
 
 .cartItemImage {
@@ -15,29 +21,34 @@
     object-fit: cover;
 }
 
-.cartItemDetails {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
+.cartItemName {
+    color: #08090a;
+    font-size: 18px;
+    font-weight: 400;
+    margin: 0 1rem;
 }
 
-.cartItemMeal {
-    font-size: 1.2rem;
-    font-weight: bold;
+.cartItemDetails {
+    display: flex;
+    justify-content: space-between;
+    min-width: 10rem;
 }
 
 .cartItemPrice {
     font-size: 1rem;
-    color: #666;
+    color: #35b8be;
 }
 
 .cartItemQuantity {
-    width: 60px;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    width: 50px;
+    background: #fafafa;
+    border: 1px solid #dddddd;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 16px;
+    color: #08090a;
 }
 
 .cartItemRemoveButton {
-    padding: 5px 10px;
+    padding: 0 10px;
 }

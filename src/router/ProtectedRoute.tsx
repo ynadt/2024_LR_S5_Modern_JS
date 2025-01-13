@@ -1,22 +1,19 @@
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import { ComponentType } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store/store.ts';
 
 interface ProtectedRouteProps {
     element: ComponentType;
-    protectionType?: 'auth' | 'guest';
+    isProtected: boolean;
 }
 
-const ProtectedRoute = ({ element: Component, protectionType }: ProtectedRouteProps) => {
+const ProtectedRoute = ({ element: Component, isProtected }: ProtectedRouteProps) => {
     const { user } = useSelector((state: RootState) => state.user);
+    const location = useLocation();
 
-    if (protectionType === 'auth' && !user) {
-        return <Navigate to="/login" replace />;
-    }
-
-    if (protectionType === 'guest' && user) {
-        return <Navigate to="/" replace />;
+    if (isProtected && !user) {
+        return <Navigate to="/login" state={{ from: location }} replace />;
     }
 
     return <Component />;

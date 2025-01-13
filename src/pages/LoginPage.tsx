@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { RootState, AppDispatch } from 'store/store.ts';
 import { loginWithEmail, loginWithGoogle } from 'store/slices/userSlice.ts';
-import AuthForm from 'components/AuthForm/AuthForm.tsx';
+import Form from 'components/AuthForm/Form.tsx';
 import Button from 'components/Button/Button.js';
 import loginFields from 'data/LoginPageData.js';
 import GoogleIcon from 'assets/icons/google-icon.svg';
@@ -11,14 +11,17 @@ import styles from 'pages/LoginPage.module.css';
 
 const LoginPage: React.FC = () => {
     const dispatch = useDispatch<AppDispatch>();
-    const { user, error, loading } = useSelector((state: RootState) => state.user); // Use loading from Redux state
+    const { user, error, loading } = useSelector((state: RootState) => state.user);
     const navigate = useNavigate();
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || '/';
 
     useEffect(() => {
         if (user) {
-            navigate('/');
+            navigate(from, { replace: true });
         }
-    }, [user, navigate]);
+    }, [user, navigate, from]);
 
     const handleLogin = async (formData: Record<string, string>) => {
         const { email, password } = formData;
@@ -41,8 +44,8 @@ const LoginPage: React.FC = () => {
     return (
         <section className={styles.section}>
             <section className={styles.container}>
-                <h2 className={styles.title}>Login</h2>
-                <AuthForm fields={loginFields} onSubmit={handleLogin} isSubmitting={loading} submitButtonText="Login" />
+                <h1 className={styles.title}>Login</h1>
+                <Form fields={loginFields} onSubmit={handleLogin} isSubmitting={loading} submitButtonText="Login" />
                 {error && <p className={styles.errorMessage}>{error.message}</p>}
                 <div className={styles.register}>
                     <span>Don’t have an account? </span>

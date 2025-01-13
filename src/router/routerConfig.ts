@@ -9,39 +9,39 @@ import ErrorPage from 'pages/ErrorPage.js';
 interface RouteConfig {
     path: string;
     element: ComponentType;
-    protected?: 'auth' | 'guest';
+    protected: boolean;
 }
 
 const routes: RouteConfig[] = [
     {
         path: '/',
         element: HomePage,
-        protected: undefined,
+        protected: false,
     },
     {
         path: '/login',
         element: LoginPage,
-        protected: 'guest',
+        protected: false,
     },
     {
         path: '/register',
         element: RegisterPage,
-        protected: 'guest',
+        protected: false,
     },
     {
         path: '/menu',
         element: MenuPage,
-        protected: undefined,
+        protected: false,
     },
     {
         path: '/cart',
         element: CartPage,
-        protected: 'auth',
+        protected: true,
     },
     {
         path: '*',
         element: ErrorPage,
-        protected: undefined,
+        protected: false,
     },
 ];
 

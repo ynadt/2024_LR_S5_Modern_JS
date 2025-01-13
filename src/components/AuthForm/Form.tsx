@@ -18,14 +18,14 @@ interface Field {
     };
 }
 
-interface AuthFormProps {
+interface FormProps {
     fields: Field[];
     onSubmit: (formData: Record<string, string>) => void;
     isSubmitting: boolean;
     submitButtonText: string;
 }
 
-const AuthForm: React.FC<AuthFormProps> = ({ fields, onSubmit, isSubmitting, submitButtonText }) => {
+const Form: React.FC<FormProps> = ({ fields, onSubmit, isSubmitting, submitButtonText }) => {
     const [formState, setFormState] = useState<Record<string, string>>(() =>
         fields.reduce(
             (acc, field) => {
@@ -123,4 +123,4 @@ const AuthForm: React.FC<AuthFormProps> = ({ fields, onSubmit, isSubmitting, sub
     );
 };
 
-export default AuthForm;
+export default Form;

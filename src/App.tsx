@@ -8,8 +8,8 @@ const App = () => (
     <Router>
         <Routes>
             <Route element={<AppLayout />}>
-                {routes.map(({ path, element, protected: protectionType }) => (
-                    <Route key={path} path={path} element={<ProtectedRoute element={element} protectionType={protectionType} />} />
+                {routes.map(({ path, element, protected: isProtected }) => (
+                    <Route key={path} path={path} element={<ProtectedRoute element={element} isProtected={isProtected} />} />
                 ))}
             </Route>
         </Routes>

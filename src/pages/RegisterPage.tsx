@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from 'store/store.ts';
 import { registerWithEmail, loginWithGoogle } from 'store/slices/userSlice.ts';
-import AuthForm from 'components/AuthForm/AuthForm.tsx';
+import Form from 'components/AuthForm/Form.tsx';
 import Button from 'components/Button/Button.js';
 import registerFields from 'data/RegisterPageData.js';
 import GoogleIcon from 'src/assets/icons/google-icon.svg';
@@ -13,12 +13,15 @@ const RegisterPage: React.FC = () => {
     const dispatch = useDispatch<AppDispatch>();
     const { user, error, loading } = useSelector((state: RootState) => state.user);
     const navigate = useNavigate();
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || '/';
 
     useEffect(() => {
         if (user) {
-            navigate('/');
+            navigate(from !== '/login' ? from : '/', { replace: true });
         }
-    }, [user, navigate]);
+    }, [user, navigate, from]);
 
     const handleRegister = async (formData: Record<string, string>) => {
         const { email, password } = formData;
@@ -42,7 +45,7 @@ const RegisterPage: React.FC = () => {
         <section className={styles.section}>
             <div className={styles.container}>
                 <h2 className={styles.title}>Register</h2>
-                <AuthForm fields={registerFields} onSubmit={handleRegister} isSubmitting={loading} submitButtonText="Register" />
+                <Form fields={registerFields} onSubmit={handleRegister} isSubmitting={loading} submitButtonText="Register" />
                 {error && <p className={styles.errorMessage}>{error.message}</p>}
                 <div className={styles.register}>
                     <span>Already have an account? </span>
