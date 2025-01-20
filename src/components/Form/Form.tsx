@@ -2,7 +2,7 @@ import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import Button from 'components/Button/Button.tsx';
 import EyeIcon from 'src/assets/icons/eye-icon.svg';
 import EyeClosedIcon from 'src/assets/icons/eye-closed-icon.svg';
-import styles from 'components/AuthForm/AuthForm.module.css';
+import styles from 'components/Form/Form.module.css';
 
 interface Field {
     name: string;

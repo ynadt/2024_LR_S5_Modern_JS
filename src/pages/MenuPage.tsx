@@ -45,7 +45,7 @@ const MenuPage = () => {
     }
 
     return (
-        <section className={styles.menuSection}>
+        <section className={styles.section}>
             <h1 className={styles.title}>Browse our menu</h1>
             <p className={styles.description}>
                 <span>Use our menu to place an order online, or </span>

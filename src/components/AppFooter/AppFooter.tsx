@@ -18,11 +18,17 @@ const AppFooter = () => {
                                 <h4 className={styles.linkTitle}>{section.title}</h4>
                                 {section.links.map((link) =>
                                     link.url === '#' ? (
-                                        <span key={link.label} className={styles.link}>
+                                        <span key={link.label} className={`${styles.link} link`}>
                                             {link.label}
                                         </span>
                                     ) : (
-                                        <a key={link.label} href={link.url} className={styles.link} target="_blank" rel="noopener noreferrer">
+                                        <a
+                                            key={link.label}
+                                            href={link.url}
+                                            className={`${styles.link} link`}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
                                             {link.label}
                                         </a>
                                     )

@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import CartItem from 'components/CartItem/CartItem.tsx';
 import Button from 'components/Button/Button.tsx';
-import Form from 'components/AuthForm/Form.tsx';
+import Form from 'components/Form/Form.tsx';
 import addressFields from 'data/CartPageAddressData.ts';
 import { selectCartItems, selectCartTotalQuantity, selectCartTotalPrice } from 'store/selectors/cartSelectors.ts';
 import { removeItemFromCart, changeItemQuantity, clearCart } from 'store/slices/cartSlice.ts';

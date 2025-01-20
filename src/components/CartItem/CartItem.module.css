@@ -2,11 +2,11 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 15px;
+    gap: var(--spacing-md);
     border: 1px solid rgba(53, 184, 190, 0.15);
-    padding: 15px;
-    border-radius: 10px;
-    background-color: #fff;
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius);
+    background-color: var(--color-background-secondary);
 }
 
 .cartItemImgContainer {
@@ -17,15 +17,14 @@
 .cartItemImage {
     width: 80px;
     height: 80px;
-    border-radius: 5px;
+    border-radius: var(--border-radius);
     object-fit: cover;
 }
 
 .cartItemName {
-    color: #08090a;
-    font-size: 18px;
-    font-weight: 400;
-    margin: 0 1rem;
+    color: var(--color-text);
+    font-size: var(--font-size-lg);
+    margin: 0 var(--spacing-sm);
 }
 
 .cartItemDetails {
@@ -35,20 +34,18 @@
 }
 
 .cartItemPrice {
-    font-size: 1rem;
-    color: #35b8be;
+    font-size: var(--font-size-base);
+    color: var(--color-primary);
 }
 
 .cartItemQuantity {
     width: 50px;
-    background: #fafafa;
-    border: 1px solid #dddddd;
-    border-radius: 6px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
     text-align: center;
-    font-size: 16px;
-    color: #08090a;
+    font-size: var(--font-size-base);
 }
 
 .cartItemRemoveButton {
-    padding: 0 10px;
+    padding: 0 var(--spacing-sm);
 }

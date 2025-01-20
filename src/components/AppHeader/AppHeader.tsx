@@ -11,6 +11,7 @@ import cartIcon from 'assets/icons/cart-icon.svg';
 import burgerMenuIcon from 'assets/icons/burger-menu-icon.svg';
 import closeMenuIcon from 'assets/icons/close-menu-icon.svg';
 import styles from './AppHeader.module.css';
+import ThemeSelector from 'components/ThemeSelector/ThemeSelector.tsx';
 
 const AppHeader = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -39,9 +40,11 @@ const AppHeader = () => {
             <NavLink to="/" className={styles.logoLink}>
                 <img loading="lazy" src={logoIcon} alt="Logo" className={styles.logoIcon} />
             </NavLink>
+            <ThemeSelector />
             <button onClick={toggleMenu} className={styles.burgerMenu} aria-label="Toggle Menu">
                 <img loading="lazy" src={burgerMenuIcon} alt="Open Menu" className={styles.icon} />
             </button>
+
             <nav className={`${styles.navContainer} ${isMenuOpen ? styles.showMenu : ''}`}>
                 <button onClick={toggleMenu} className={styles.closeMenuButton} aria-label="Close Menu">
                     <img loading="lazy" src={closeMenuIcon} alt="Close Menu" className={styles.icon} />
@@ -56,7 +59,7 @@ const AppHeader = () => {
                             <NavLink
                                 key={item.label}
                                 to={item.href}
-                                className={({ isActive }) => `${styles.navItem} ${isActive ? styles.activeNavItem : ''}`}
+                                className={({ isActive }) => `${styles.navItem} link ${isActive ? styles.activeNavItem : ''}`}
                                 onClick={item.label === 'Logout' ? handleLogout : () => setIsMenuOpen(false)}
                             >
                                 {item.label}

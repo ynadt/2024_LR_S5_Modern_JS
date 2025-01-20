@@ -1,12 +1,20 @@
 .section {
-    background-image: url('../assets/backgrounds/home_shape_bg.svg');
-    background-size: cover;
-    background-position: center;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: left;
-    padding: 2rem;
+    padding: var(--spacing-lg);
+    background-size: cover;
+    background-position: center;
+    background-color: var(--color-background);
+}
+
+[data-theme='light'] .section {
+    background-image: url('../assets/backgrounds/home_shape_bg.svg');
+}
+
+[data-theme='dark'] .section {
+    background-image: none;
 }
 
 .contentWrapper {
@@ -24,28 +32,29 @@
 
 .heading {
     font-size: 4rem;
-    font-weight: normal;
-    line-height: 4rem;
-    margin-bottom: 1rem;
+    font-weight: var(--font-weight-normal);
+    line-height: 1;
+    margin-bottom: var(--spacing-md);
+    color: var(--color-text);
 }
 
 .highlight {
-    color: #08090a;
+    color: var(--color-text);
 }
 
 .accent {
-    color: #35b8be;
+    color: var(--color-primary);
 }
 
 .description {
-    color: #546285;
-    font-size: 1.1rem;
-    line-height: 1.5rem;
-    margin-bottom: 2rem;
+    color: var(--color-secondary);
+    font-size: var(--font-size-lg);
+    line-height: 1.5;
+    margin-bottom: var(--spacing-lg);
 }
 
 .buttonContainer {
-    margin-bottom: 2rem;
+    margin-bottom: var(--spacing-lg);
 }
 
 .reviewSection {
@@ -57,24 +66,24 @@
 .trustpilotLogo {
     width: 110px;
     height: auto;
-    margin-right: 1rem;
+    margin-right: var(--spacing-sm);
 }
 
 .reviewDetails {
     display: flex;
-    font-size: 1rem;
+    font-size: var(--font-size-sm);
 }
 
 .rating {
-    color: #35b8be;
-    margin-right: 0.5rem;
+    color: var(--color-primary);
+    margin-right: var(--spacing-xs);
 }
 
 .imageContainer {
     flex: 1;
     display: flex;
     justify-content: flex-end;
-    padding: 2rem;
+    padding: var(--spacing-lg);
 }
 
 .heroImage {

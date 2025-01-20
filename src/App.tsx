@@ -1,4 +1,3 @@
-import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import AppLayout from 'components/AppLayout/AppLayout.js';
 import ProtectedRoute from 'router/ProtectedRoute.js';

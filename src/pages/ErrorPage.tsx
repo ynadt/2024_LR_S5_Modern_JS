@@ -1,3 +1,3 @@
-const ErrorPage = () => <>There will be 404 Page</>;
+const ErrorPage = () => <>This is 404 Page</>;
 
 export default ErrorPage;

@@ -1,60 +1,58 @@
-.menuSection {
+.section {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 24px;
     padding: 140px 10px;
-    background-image: url('src/assets/backgrounds/menu_bg.svg');
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
+    background-color: var(--color-background);
+}
+
+[data-theme='light'] .section {
+    background-image: url('../assets/backgrounds/menu_bg.svg');
+}
+
+[data-theme='dark'] .section {
+    background-image: none;
 }
 
 .title {
     margin: 0;
     text-align: center;
-    color: #35b8be;
-    font-size: 50px;
-    font-family: Inter, sans-serif;
-    font-weight: 400;
-    line-height: 55px;
-    letter-spacing: 1.65px;
     word-wrap: break-word;
 }
 
 .description {
     width: 50%;
     text-align: center;
-    color: #546285;
-    font-size: 16px;
-    font-family: Inter, sans-serif;
-    font-weight: 400;
-    line-height: 27px;
-    letter-spacing: 0.36px;
+    color: var(--color-secondary);
+    line-height: 2;
     word-wrap: break-word;
 }
 
 .phoneTooltip {
     position: relative;
-    color: #35b8be;
+    color: var(--color-primary);
     cursor: pointer;
 }
 
 .tooltipText {
     visibility: hidden;
     width: 160px;
-    background-color: #35b8be;
-    color: #fff;
+    background-color: var(--color-primary);
+    color: var(--color-background);
     text-align: center;
-    border-radius: 4px;
-    padding: 8px;
+    border-radius: var(--border-radius);
+    padding: var(--spacing-xs);
     position: absolute;
     bottom: 125%;
     left: 50%;
     transform: translateX(-50%);
     opacity: 0;
     transition: opacity 0.3s;
-    font-size: 14px;
+    font-size: var(--font-size-sm);
     line-height: 1.2;
     z-index: 1;
 }
@@ -66,38 +64,34 @@
 
 .buttonRow {
     display: flex;
-    gap: 16px;
+    gap: var(--spacing-md);
     justify-content: center;
     flex-wrap: wrap;
 }
 
 .inactiveCategory {
-    background-color: transparent;
-    color: #222222;
+    background-color: var(--color-background-secondary);
+    color: var(--color-text);
 }
 
 .noItemsMessage {
-    color: #546285;
-    font-size: 16px;
-    font-family: Inter, sans-serif;
-    font-weight: 400;
-    line-height: 27px;
-    letter-spacing: 0.35px;
+    color: var(--color-secondary);
+    font-size: var(--font-size-base);
+    line-height: 1.7;
     text-align: center;
 }
 
 @media (max-width: 800px) {
-    .menuSection {
+    .section {
         padding: 0;
     }
 }
 
 .cardList {
     display: grid;
-    gap: 20px;
+    gap: var(--spacing-lg);
     grid-template-columns: repeat(1, 1fr);
-    background-color: #f5fbfc;
-    margin-bottom: 60px;
+    margin-bottom: var(--spacing-xl);
 
     @media (min-width: 900px) {
         grid-template-columns: repeat(2, 1fr);

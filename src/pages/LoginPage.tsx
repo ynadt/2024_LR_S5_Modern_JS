@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { RootState, AppDispatch } from 'store/store.ts';
 import { loginWithEmail, loginWithGoogle } from 'store/slices/userSlice.ts';
-import Form from 'components/AuthForm/Form.tsx';
+import Form from 'components/Form/Form.tsx';
 import Button from 'components/Button/Button.js';
 import loginFields from 'data/LoginPageData.js';
 import GoogleIcon from 'assets/icons/google-icon.svg';
@@ -43,7 +43,7 @@ const LoginPage: React.FC = () => {
 
     return (
         <section className={styles.section}>
-            <section className={styles.container}>
+            <div className={styles.container}>
                 <h1 className={styles.title}>Login</h1>
                 <Form fields={loginFields} onSubmit={handleLogin} isSubmitting={loading} submitButtonText="Login" />
                 {error && <p className={styles.errorMessage}>{error.message}</p>}
@@ -62,7 +62,7 @@ const LoginPage: React.FC = () => {
                     <img src={GoogleIcon} alt="Google Icon" className={styles.googleIcon} />
                     Continue with Google
                 </Button>
-            </section>
+            </div>
         </section>
     );
 };

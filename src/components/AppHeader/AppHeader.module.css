@@ -2,7 +2,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 16px 24px;
+    padding: var(--spacing-md) var(--spacing-lg);
+    background-color: var(--color-background);
 }
 
 .logoLink {
@@ -14,7 +15,7 @@
     width: 40px;
     height: auto;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease;
 }
 
 .logoIcon:hover {
@@ -23,7 +24,7 @@
 
 .burgerMenu {
     display: none;
-    font-size: 24px;
+    font-size: var(--font-size-lg);
     background: none;
     border: none;
     cursor: pointer;
@@ -32,25 +33,16 @@
 .navContainer {
     display: flex;
     align-items: center;
-    gap: 32px;
+    gap: var(--spacing-lg);
 }
 
 .navLinks {
     display: flex;
-    gap: 32px;
+    gap: var(--spacing-lg);
 }
 
 .navItem {
-    color: #28224b;
-    font:
-        400 15px Inter,
-        sans-serif;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.navItem:hover {
-    color: #35b8be;
+    color: var(--color-text);
 }
 
 .cartIconContainer {
@@ -59,11 +51,11 @@
     justify-content: center;
     width: 55px;
     height: 55px;
-    margin-left: 65px;
-    background-color: #35b8be;
-    border-radius: 4px;
+    margin-left: var(--spacing-lg);
+    background-color: var(--color-primary);
+    border-radius: var(--border-radius);
     cursor: pointer;
-    transition: all 0.5s ease;
+    transition: transform 0.5s ease;
     position: relative;
 }
 
@@ -73,8 +65,8 @@
 
 .cartIcon {
     width: 25px;
-    height: 17px;
-    fill: #fff;
+    height: auto;
+    fill: var(--color-background);
 }
 
 .cartCounter {
@@ -86,12 +78,12 @@
     justify-content: center;
     width: 18px;
     height: 18px;
-    background-color: #fff;
-    color: #35b8be;
-    font-size: 12px;
-    font-weight: bold;
+    background-color: var(--color-background);
+    color: var(--color-primary);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-bold);
     border-radius: 50%;
-    box-shadow: 0 0 3px 1px rgba(53, 184, 190, 0.5);
+    box-shadow: var(--box-shadow);
 }
 
 .closeMenuButton {
@@ -100,7 +92,7 @@
 
 .icon {
     width: 24px;
-    height: 24px;
+    height: auto;
     cursor: pointer;
     transition: transform 0.3s ease;
 }
@@ -112,10 +104,6 @@
 @media (max-width: 700px) {
     .burgerMenu {
         display: block;
-        font-size: 24px;
-        background: none;
-        border: none;
-        cursor: pointer;
     }
 
     .navContainer {
@@ -124,16 +112,15 @@
         position: fixed;
         top: 64px;
         right: 24px;
-        background-color: white;
-        padding: 60px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        border-radius: 8px;
+        background-color: var(--color-background);
+        padding: var(--spacing-lg);
+        border-radius: var(--border-radius);
         width: 85vw;
         z-index: 10;
     }
 
     .navItem {
-        font-size: 25px;
+        font-size: var(--font-size-lg);
     }
 
     .showMenu {
@@ -143,17 +130,17 @@
     .closeMenuButton {
         display: flex;
         align-self: flex-end;
-        font-size: 24px;
+        font-size: var(--font-size-lg);
         background: none;
         border: none;
         cursor: pointer;
-        color: #28224b;
-        margin-bottom: 8px;
+        color: var(--color-text);
+        margin-bottom: var(--spacing-sm);
     }
 
     .navLinks {
         flex-direction: column;
-        gap: 32px;
+        gap: var(--spacing-lg);
     }
 
     .cartIconContainer {
@@ -164,6 +151,6 @@
 }
 
 .activeNavItem {
-    color: #35b8be;
-    font-weight: bold;
+    color: var(--color-primary);
+    font-weight: var(--font-weight-bold);
 }

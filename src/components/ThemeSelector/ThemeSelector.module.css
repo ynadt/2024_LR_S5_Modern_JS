@@ -1,0 +1,46 @@
+.themeToggleContainer {
+    display: flex;
+    align-items: center;
+    margin: 0 10px;
+}
+
+.themeToggleCheckbox {
+    opacity: 0;
+    position: absolute;
+}
+
+.themeToggleCheckboxLabel {
+    background-color: var(--theme-toggle-background-color);
+    width: 50px;
+    height: 25px;
+    border-radius: 50px;
+    border: var(--theme-toggle-border-color) 1px solid;
+    position: relative;
+    padding: 5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.themeToggleCheckboxLabel img {
+    width: 16px;
+    height: 16px;
+    z-index: 9;
+    color: var(--theme-toggle-icon-color);
+}
+
+.themeToggleCheckboxLabel .ball {
+    background-color: var(--theme-toggle-ball-background-color);
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    left: 0;
+    border-radius: 50%;
+    transition: transform 0.2s linear;
+    z-index: 10;
+}
+
+.themeToggleCheckbox:checked + .themeToggleCheckboxLabel .ball {
+    transform: translateX(25px);
+}
