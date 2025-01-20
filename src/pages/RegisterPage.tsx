@@ -7,6 +7,7 @@ import Form from 'components/Form/Form.tsx';
 import Button from 'components/Button/Button.js';
 import registerFields from 'data/RegisterPageData.js';
 import GoogleIcon from 'src/assets/icons/google-icon.svg';
+import { toast } from 'react-toastify';
 import styles from 'pages/LoginPage.module.css';
 
 const RegisterPage: React.FC = () => {
@@ -28,16 +29,20 @@ const RegisterPage: React.FC = () => {
 
         try {
             await dispatch(registerWithEmail({ email, password })).unwrap();
+            toast.success('Registration successful!');
         } catch (err) {
             console.error('Registration failed:', err);
+            toast.error('Registration failed. Please try again.');
         }
     };
 
     const handleGoogleLogin = async () => {
         try {
             await dispatch(loginWithGoogle()).unwrap();
+            toast.success('Google login successful!');
         } catch (err) {
             console.error('Google login failed:', err);
+            toast.error('Google login failed. Please try again.');
         }
     };
 

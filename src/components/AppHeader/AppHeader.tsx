@@ -5,13 +5,14 @@ import { navItems } from 'data/headerData.js';
 import { AppDispatch, RootState } from 'store/store.ts';
 import { logout } from 'store/slices/userSlice';
 import { selectCartTotalQuantity } from 'store/selectors/cartSelectors';
+import ThemeSelector from 'components/ThemeSelector/ThemeSelector.tsx';
+import { toast } from 'react-toastify';
 
 import logoIcon from 'assets/icons/logo-icon.svg';
 import cartIcon from 'assets/icons/cart-icon.svg';
 import burgerMenuIcon from 'assets/icons/burger-menu-icon.svg';
 import closeMenuIcon from 'assets/icons/close-menu-icon.svg';
 import styles from './AppHeader.module.css';
-import ThemeSelector from 'components/ThemeSelector/ThemeSelector.tsx';
 
 const AppHeader = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -25,8 +26,10 @@ const AppHeader = () => {
     const handleLogout = async () => {
         try {
             await dispatch(logout()).unwrap();
+            toast.success('You logged out successfully!');
             navigate('/');
         } catch (error) {
+            toast.error('Error occurred during logout. Please try again.');
             console.error('Error during logout:', error);
         }
     };

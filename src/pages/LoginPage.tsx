@@ -7,6 +7,7 @@ import Form from 'components/Form/Form.tsx';
 import Button from 'components/Button/Button.js';
 import loginFields from 'data/LoginPageData.js';
 import GoogleIcon from 'assets/icons/google-icon.svg';
+import { toast } from 'react-toastify';
 import styles from 'pages/LoginPage.module.css';
 
 const LoginPage: React.FC = () => {
@@ -19,6 +20,7 @@ const LoginPage: React.FC = () => {
 
     useEffect(() => {
         if (user) {
+            toast.success('Logged in successfully!');
             navigate(from, { replace: true });
         }
     }, [user, navigate, from]);
@@ -29,6 +31,7 @@ const LoginPage: React.FC = () => {
         try {
             await dispatch(loginWithEmail({ email, password })).unwrap();
         } catch (err) {
+            toast.error('Login failed.');
             console.error('Login failed:', err);
         }
     };
@@ -37,6 +40,7 @@ const LoginPage: React.FC = () => {
         try {
             await dispatch(loginWithGoogle()).unwrap();
         } catch (err) {
+            toast.error('Google login failed. Please try again.');
             console.error('Google login failed:', err);
         }
     };

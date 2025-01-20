@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { INITIAL_VISIBLE_COUNT, LOAD_MORE_COUNT } from 'data/constants.ts';
 import { addItemToCart } from 'store/slices/cartSlice.ts';
-import { fetchProducts } from 'store/slices/productsSlice.ts';
+import { fetchProducts, Product } from 'store/slices/productsSlice.ts';
 import { RootState, AppDispatch } from 'store/store.ts';
 import Button from 'components/Button/Button.tsx';
 import Card from 'components/Card/Card.tsx';
+import { toast } from 'react-toastify';
 import styles from 'pages/MenuPage.module.css';
 
 const MenuPage = () => {
@@ -38,6 +39,16 @@ const MenuPage = () => {
 
     const handleLoadMore = () => {
         setVisibleCount((prevCount) => prevCount + LOAD_MORE_COUNT);
+    };
+
+    const handleAddToCart = (product: Product, quantity: number) => {
+        dispatch(
+            addItemToCart({
+                ...product,
+                quantity,
+            })
+        );
+        toast.success(`${product.meal} added to cart!`);
     };
 
     if (error) {
@@ -73,18 +84,7 @@ const MenuPage = () => {
                 <>
                     <div className={styles.cardList}>
                         {visibleProducts.map((product) => (
-                            <Card
-                                key={product.id}
-                                item={product}
-                                onAddToCart={(quantity) =>
-                                    dispatch(
-                                        addItemToCart({
-                                            ...product,
-                                            quantity,
-                                        })
-                                    )
-                                }
-                            />
+                            <Card key={product.id} item={product} onAddToCart={(quantity) => handleAddToCart(product, quantity)} />
                         ))}
                     </div>
                     {visibleProducts.length < filteredProducts.length && <Button onClick={handleLoadMore}>See more</Button>}

@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { BASE_URL } from 'services/api';
 import { CartItem } from 'types/types';
 
-interface Product extends Omit<CartItem, 'quantity'> {
+export interface Product extends Omit<CartItem, 'quantity'> {
     category: string;
 }
 
