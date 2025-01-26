@@ -31,10 +31,11 @@
       "firebaseSetup/*": ["src/firebaseSetup/*"],
       "utils/*": ["src/utils/*"],
       "types/*": ["src/types/*"],
-      "store/*": ["src/store/*"]
+      "store/*": ["src/store/*"],
+      "tests/*": ["src/tests/*"]
     }
   },
-  "include": ["src/**/*", "eslint.config.js", "vite.config.ts", "src/types/globals.d.ts"],
+  "include": ["src/**/*", "eslint.config.js", "vite.config.ts", "src/types/globals.d.ts", "tests/**/*"],
   "exclude": ["node_modules", "dist"]
 }
 
